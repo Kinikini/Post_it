@@ -16,4 +16,7 @@
     <string name="post_value">You can start typing</string>
     <string name="tag_post">Add your #</string>
     <string name="post_btn">Now post</string>
+
+    <string name="submited_post_msg">The post has been submitted to the administrator.</string>
+    <string name="unsubmited_post_msg">Please fill in all fields.</string>
 </resources>

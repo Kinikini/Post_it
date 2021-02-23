@@ -30,7 +30,7 @@
         app:srcCompat="@drawable/avatar_default_star_wars" />
 
     <EditText
-        android:id="@+id/editTextTextMultiLine2"
+        android:id="@+id/post_content"
         android:layout_width="346dp"
         android:layout_height="141dp"
         android:layout_marginTop="36dp"
@@ -44,7 +44,7 @@
         app:layout_constraintTop_toBottomOf="@+id/new_post_image" />
 
     <EditText
-        android:id="@+id/tag_post"
+        android:id="@+id/post_tags"
         android:layout_width="327dp"
         android:layout_height="57dp"
         android:layout_marginTop="40dp"
@@ -55,10 +55,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine2" />
+        app:layout_constraintTop_toBottomOf="@+id/post_content" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/submit_post"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
@@ -69,5 +69,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tag_post" />
+        app:layout_constraintTop_toBottomOf="@+id/post_tags" />
 </androidx.constraintlayout.widget.ConstraintLayout>
