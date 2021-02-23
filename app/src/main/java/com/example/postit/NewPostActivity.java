@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -62,6 +63,7 @@ public class NewPostActivity extends AppCompatActivity {
 
         submitPost = (Button)findViewById(R.id.submit_post);
 
+
         submitPost.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -99,12 +101,12 @@ public class NewPostActivity extends AppCompatActivity {
                             {
 
                             }
-
                         }
                     });
                 }
                 else
                 {
+
                     Toast toast = Toast.makeText(getApplicationContext(),getResources().getString(R.string.unsubmited_post_msg).toString(),Toast.LENGTH_SHORT);
                     toast.show();
                 }

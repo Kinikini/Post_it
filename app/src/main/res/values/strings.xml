@@ -19,4 +19,9 @@
 
     <string name="submited_post_msg">The post has been submitted to the administrator.</string>
     <string name="unsubmited_post_msg">Please fill in all fields.</string>
+    <string name="bottom_home_text">Home</string>
+    <string name="bottom_notifications_text">Notifications</string>
+    <string name="bottom_ac_text">Account</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -18,11 +18,14 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,6 +34,11 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton addPostBtn;
     private FirebaseFirestore firebaseFirestore;
     private String current_user_id;
+    private BottomNavigationView mainBottomNav;
+
+    private HomeFragment homeFragment;
+    private NotificationFragment notificationFragment;
+    private AccountFragment accountFragment;
 
 
     @Nullable
@@ -46,6 +54,40 @@ public class MainActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
+        mainBottomNav = (BottomNavigationView) findViewById(R.id.mainBottomNav);
+
+        //FRAGMENTS
+        homeFragment = new HomeFragment();
+        notificationFragment = new NotificationFragment();
+        accountFragment = new AccountFragment();
+
+        mainBottomNav.setOnNavigationItemReselectedListener(new BottomNavigationView.OnNavigationItemReselectedListener() {
+            @Override
+            public void onNavigationItemReselected(@NonNull MenuItem item) {
+
+                switch (item.getItemId())
+                {
+                    case R.id.bottom_action_home:
+                        replaceFragment(homeFragment);
+                        break;
+
+                    case R.id.bottom_action_notification:
+                        replaceFragment(notificationFragment);
+                        break;
+
+                    case R.id.bottom_action_account:
+                        replaceFragment(accountFragment);
+
+                        break;
+                    default:
+                        return;
+
+                }
+
+
+                return;
+            }
+        });
 
 
 
@@ -158,6 +200,13 @@ public class MainActivity extends AppCompatActivity {
         startActivity(loginIntent);
         finish();
 
+    }
+
+    private void replaceFragment(Fragment fragment){
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+
+        fragmentTransaction.replace(R.id.main_container,fragment);
+        fragmentTransaction.commit();
     }
 
 }
