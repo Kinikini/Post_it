@@ -45,34 +45,32 @@ public class HomeFragment extends Fragment {
     }
 
 
-   /* @Override
+   @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-    }*/
-    @Nullable
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        super.onCreateView(inflater,container,savedInstanceState);
+        //super.onCreateView(inflater,container,savedInstanceState);
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);// Inflate the layout for this fragment
 
         blog_list = new ArrayList<>();
-        blog_list_view = getActivity().findViewById(R.id.blog_list_view);
+        blog_list_view = view.findViewById(R.id.blog_list_view);
         blogRecyclerAdapter = new BlogRecyclerAdapter(blog_list);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
-        blog_list_view.setLayoutManager(layoutManager);
+        blog_list_view.setLayoutManager(new LinearLayoutManager(getActivity()));
         blog_list_view.setAdapter(blogRecyclerAdapter);
 
         firebaseFirestore = FirebaseFirestore.getInstance();
 
         firebaseFirestore.collection("Posts").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
-            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+            public void onEvent(QuerySnapshot queryDocumentSnapshots, FirebaseFirestoreException e) {
                 for(DocumentChange doc: queryDocumentSnapshots.getDocumentChanges())
                 {
                     if(doc.getType() == DocumentChange.Type.ADDED)

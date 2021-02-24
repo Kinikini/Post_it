@@ -4,21 +4,21 @@ import java.sql.Timestamp;
 
 public class Post  {
 
-    private String user_id;
-    private String content;
-    private String tags;
-    private Timestamp timestamp;
-    private Boolean published;
+    public String user_id;
+    public String content;
+    public String tags;
+    //public Timestamp timestamp;
+    //public Boolean published;
 
     public Post() {
     }
 
-    public Post(String content, Boolean published, String tags, Timestamp timestamp, String user_id) {
+    public Post(String content/*, Boolean published*/, String tags/*, Timestamp timestamp*/, String user_id) {
         this.user_id = user_id;
         this.content = content;
         tags = tags;
-        this.timestamp = timestamp;
-        this.published = published;
+        //this.timestamp = timestamp;
+        //this.published = published;
     }
 
     public String getUser_id() {
@@ -45,19 +45,19 @@ public class Post  {
         tags = tags;
     }
 
-    public Timestamp getTimestamp() {
+    /*public Timestamp getTimestamp() {
         return timestamp;
     }
 
     public void setTimestamp(Timestamp timestamp) {
         this.timestamp = timestamp;
-    }
+    }*/
 
-    public Boolean getPublished() {
+    /*public Boolean getPublished() {
         return published;
     }
 
     public void setPublished(Boolean published) {
         this.published = published;
-    }
+    }*/
 }

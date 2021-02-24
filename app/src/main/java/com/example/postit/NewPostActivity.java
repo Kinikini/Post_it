@@ -75,14 +75,14 @@ public class NewPostActivity extends AppCompatActivity {
                 if(!TextUtils.isEmpty(content) && !TextUtils.isEmpty(tags))
                 {
                     Map<String, Object> postMap = new HashMap<>();
-                    Boolean published = new Boolean(false);
+                    //Boolean published = new Boolean(false);
 
 
                     postMap.put("content", content);
                     postMap.put("tags", tags);
-                    postMap.put("published",published);
+                    //postMap.put("published",published);
                     postMap.put("user_id",current_user_id);
-                    postMap.put("timestamp", FieldValue.serverTimestamp());
+                    //postMap.put("timestamp", FieldValue.serverTimestamp());
 
                     firebaseFirestore.collection("Posts").add(postMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                         @Override
