@@ -8,15 +8,15 @@ public class Post  {
     public String content;
     public String tags;
     //public Timestamp timestamp;
-    //public Boolean published;
+    public Boolean published;
 
     public Post() {
     }
 
-    public Post(String content/*, Boolean published*/, String tags/*, Timestamp timestamp*/, String user_id) {
+    public Post(String content, Boolean published, String tags/*, Timestamp timestamp*/, String user_id) {
         this.user_id = user_id;
         this.content = content;
-        tags = tags;
+        this.tags = tags;
         //this.timestamp = timestamp;
         //this.published = published;
     }
@@ -53,11 +53,11 @@ public class Post  {
         this.timestamp = timestamp;
     }*/
 
-    /*public Boolean getPublished() {
+    public Boolean getPublished() {
         return published;
     }
 
     public void setPublished(Boolean published) {
         this.published = published;
-    }*/
+    }
 }

@@ -31,8 +31,8 @@ public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapte
         String content_data = blog_list.get(position).getPost_content();
         holder.setContentText(content_data);
 
-        /*String tags_data = blog_list.get(position).getTags();
-        holder.setTagsText(tags_data);*/
+        String tags_data = blog_list.get(position).getTags();
+        holder.setTagsText(tags_data);
     }
 
     @Override

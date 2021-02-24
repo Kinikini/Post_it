@@ -4,15 +4,19 @@
 
     <item
         android:id="@+id/bottom_action_home"
+        android:enabled="true"
         android:icon="@drawable/baseline_home_black_24"
-        android:title="@string/bottom_home_text" />
+        android:title="@string/bottom_home_text"
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/bottom_action_notification"
         android:icon="@drawable/baseline_notifications_black_24"
-        android:title="@string/bottom_notifications_text" />
+        android:title="@string/bottom_notifications_text"
+        app:showAsAction="always" />
     <item
         android:id="@+id/bottom_action_account"
         android:icon="@drawable/baseline_person_black_24"
-        android:title="@string/bottom_ac_text" />
+        android:title="@string/bottom_ac_text"
+        app:showAsAction="always" />
 </menu>

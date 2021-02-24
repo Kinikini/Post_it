@@ -49,11 +49,14 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         mAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
+        firebaseFirestore.enableNetwork();
         mainBottomNav = (BottomNavigationView) findViewById(R.id.mainBottomNav);
 
         //FRAGMENTS
@@ -61,33 +64,32 @@ public class MainActivity extends AppCompatActivity {
         notificationFragment = new NotificationFragment();
         accountFragment = new AccountFragment();
 
-        //replaceFragment(homeFragment);
 
-        mainBottomNav.setOnNavigationItemReselectedListener(new BottomNavigationView.OnNavigationItemReselectedListener() {
+
+        mainBottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onNavigationItemReselected(@NonNull MenuItem item) {
+            public boolean onNavigationItemSelected(MenuItem item) {
 
                 switch (item.getItemId())
                 {
                     case R.id.bottom_action_home:
                         replaceFragment(homeFragment);
-                        break;
+                        return true;
 
                     case R.id.bottom_action_notification:
                         replaceFragment(notificationFragment);
-                        break;
+                        return true;
 
                     case R.id.bottom_action_account:
                         replaceFragment(accountFragment);
-
-                        break;
+                        return true;
                     default:
-                        return;
+                        return false;
 
                 }
 
 
-                return;
+
             }
         });
 
@@ -130,12 +132,14 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
 
+                    replaceFragment(homeFragment);
                     if (task.isSuccessful()){
 
                         if (!task.getResult().exists()){
 
                                 Intent setupIntent = new Intent(MainActivity.this, SetupActivity.class);
                                 startActivity(setupIntent);
+
                                 finish();
 
                         }
@@ -189,8 +193,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void logOut() {
-
+        firebaseFirestore.getInstance().disableNetwork();
         mAuth.signOut();
+
         sendToLoginPage();
 
     }

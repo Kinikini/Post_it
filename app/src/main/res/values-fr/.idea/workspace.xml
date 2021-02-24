@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="7ab0d4d8-06d9-43b8-aecd-cf727566ee64" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/com/example/postit/BlogRecyclerAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/com/example/postit/BlogRecyclerAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/com/example/postit/HomeFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/com/example/postit/HomeFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/com/example/postit/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/com/example/postit/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/com/example/postit/NewPostActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/com/example/postit/NewPostActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/com/example/postit/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/com/example/postit/Post.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../menu/bottom_menu.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../menu/bottom_menu.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../../.." />
+  </component>
+  <component name="ProjectId" id="1owIxCsyL1LjHCKjSi4hz4RS7mf" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
+    <property name="show.migrate.to.gradle.popup" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\utilisateur\Desktop\Project\Post_it\app\src\main\res\values-fr" />
+    </key>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7ab0d4d8-06d9-43b8-aecd-cf727566ee64" name="Default Changelist" comment="" />
+      <created>1614191469409</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1614191469409</updated>
+    </task>
+    <servers />
+  </component>
+</project>
