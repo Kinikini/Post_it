@@ -3,16 +3,26 @@ package com.example.postit;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link HomeFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import org.w3c.dom.DocumentType;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.Nullable;
+
 public class HomeFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
@@ -24,41 +34,57 @@ public class HomeFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private RecyclerView blog_list_view;
+    private List<Post> blog_list;
+
+    private FirebaseFirestore firebaseFirestore;
+    private BlogRecyclerAdapter blogRecyclerAdapter;
+
     public HomeFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment HomeFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static HomeFragment newInstance(String param1, String param2) {
-        HomeFragment fragment = new HomeFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
-    @Override
+   /* @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-    }
-
+    }*/
+    @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        super.onCreateView(inflater,container,savedInstanceState);
+
+        View view = inflater.inflate(R.layout.fragment_home, container, false);// Inflate the layout for this fragment
+
+        blog_list = new ArrayList<>();
+        blog_list_view = getActivity().findViewById(R.id.blog_list_view);
+        blogRecyclerAdapter = new BlogRecyclerAdapter(blog_list);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+        blog_list_view.setLayoutManager(layoutManager);
+        blog_list_view.setAdapter(blogRecyclerAdapter);
+
+        firebaseFirestore = FirebaseFirestore.getInstance();
+
+        firebaseFirestore.collection("Posts").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+                for(DocumentChange doc: queryDocumentSnapshots.getDocumentChanges())
+                {
+                    if(doc.getType() == DocumentChange.Type.ADDED)
+                    {
+                        Post post = doc.getDocument().toObject(Post.class);
+                        blog_list.add(post);
+                        blogRecyclerAdapter.notifyDataSetChanged();
+                    }
+                }
+            }
+        });
+
+        return view;
     }
 }
