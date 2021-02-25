@@ -28,4 +28,14 @@
     <string name="username">Username</string>
     <string name="content">Content</string>
     <string name="textview">TextView</string>
+
+
+    <!-- New -->
+
+    <string name="register">REGISTER</string>
+    <string name="login_email_hint">Email</string>
+    <string name="login_password_hint">Password</string>
+    <string name="confirm_password_hint">Confirm password</string>
+    <string name="signup_login_hint">Already have an account? Sign In</string>
+    <string name="login_signup_hint">Don\'t have an account? Sign Up</string>
 </resources>
