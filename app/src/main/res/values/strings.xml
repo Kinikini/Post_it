@@ -9,7 +9,7 @@
     <string name="action_setting_text">Account Settings</string>
     <string name="action_logout_text">Logout</string>
     <string name="createaccount">Create Account</string>
-    <string name="already">Already a member ?</string>
+    <string name="already">Already a member ? Sign in</string>
     <string name="confirmPassword">Confirm your password</string>
     <string name="setup_name_hint">Your name</string>
     <string name="setup_btn_name_text">Save Account Settings</string>

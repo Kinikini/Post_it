@@ -66,7 +66,7 @@
             style="@style/newhereButton"
             android:id="@+id/newhb"
             android:layout_gravity="center_horizontal"
-            android:text="@string/login_signup_hint"
+            android:text="@string/already"
             android:layout_marginTop="@dimen/loginViewsMargin"/>
 
     </LinearLayout>

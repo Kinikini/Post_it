@@ -9,7 +9,7 @@
     <string name="action_setting_text">Paramètres</string>
     <string name="action_logout_text">Déconnexion</string>
     <string name="createaccount">Créer un compte</string>
-    <string name="already">Déjà membre?</string>
+    <string name="already">Déjà membre? Connectez vous</string>
     <string name="confirmPassword">Confirmez votre mot de passe</string>
     <string name="setup_name_hint">Votre nom</string>
     <string name="setup_btn_name_text">Sauvegarder les paramètres du compte</string>
