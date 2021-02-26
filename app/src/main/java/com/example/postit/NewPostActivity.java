@@ -10,15 +10,12 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -39,6 +36,8 @@ public class NewPostActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private String current_user_id;
 
+    private Toolbar go_back;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +50,7 @@ public class NewPostActivity extends AppCompatActivity {
         current_user_id = firebaseAuth.getCurrentUser().getUid();
 
 
-        newPostToolbar = findViewById(R.id.new_post_toolbar);
+        newPostToolbar = findViewById(R.id.go_back);
         setSupportActionBar(newPostToolbar);
         getSupportActionBar().setTitle("Add new post");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -62,6 +61,17 @@ public class NewPostActivity extends AppCompatActivity {
         postTags = (EditText)findViewById(R.id.post_tags);
 
         submitPost = (Button)findViewById(R.id.submit_post);
+
+        go_back = (Toolbar) findViewById(R.id.go_back);
+
+        go_back.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent mainIntent = new Intent(NewPostActivity.this,MainActivity.class);
+                startActivity(mainIntent);
+                finish();
+            }
+        });
 
 
         submitPost.setOnClickListener(new View.OnClickListener(){

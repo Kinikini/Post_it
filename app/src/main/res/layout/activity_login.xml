@@ -51,23 +51,22 @@
                 android:layout_marginLeft="30dp">
 
 
-                <TextView
+                <!--<TextView
                     style="@style/headerText"
                     android:layout_gravity="center"
                     android:text="Postit"
-                    android:layout_marginTop="40dp"/>
+                    android:layout_marginTop="40dp"/>-->
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/logo" />
                 <include
                     layout="@layout/layout_login"/>
 
             </LinearLayout>
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="30dp"
-                android:layout_marginLeft="10dp"
-                android:src="@android:drawable/ic_menu_close_clear_cancel" />
         </RelativeLayout>
 
     </ScrollView>

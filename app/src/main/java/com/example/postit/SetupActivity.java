@@ -202,7 +202,7 @@ public class SetupActivity extends AppCompatActivity {
 
                         if (task.isSuccessful()){
 
-                            Toast.makeText(SetupActivity.this, "User settings are updated ", Toast.LENGTH_LONG).show();
+                            Toast.makeText(SetupActivity.this, getResources().getString(R.string.setting_updated).toString(), Toast.LENGTH_LONG).show();
                             Intent mainIntent = new Intent(SetupActivity.this, MainActivity.class);
                             startActivity(mainIntent);
                             finish();
@@ -230,7 +230,7 @@ public class SetupActivity extends AppCompatActivity {
 
                     if (ContextCompat.checkSelfPermission(SetupActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
 
-                        Toast.makeText(SetupActivity.this, "Permission Denied", Toast.LENGTH_LONG).show();
+                        Toast.makeText(SetupActivity.this, getResources().getString(R.string.permission_denied).toString(), Toast.LENGTH_LONG).show();
                         ActivityCompat.requestPermissions(SetupActivity.this, new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
 
                     } else {

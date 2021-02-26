@@ -29,6 +29,8 @@
     <string name="content">Content</string>
     <string name="textview">TextView</string>
 
+    <string name="permission_denied">Permission Denied</string>
+    <string name="setting_updated">Settings are updated</string>
 
     <!-- New -->
 
