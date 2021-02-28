@@ -41,4 +41,27 @@
     <string name="login_signup_hint">Pas inscirt? S\'inscrire</string>
 
     <string name="setting_updated">Paramètres mis à jour!</string>
+    <string name="post_content">Your text here</string>
+    <string name="post_title_here">Title</string>
+    <string name="cancel">Annuler</string>
+    <string name="clear_all">Tout effacer</string>
+
+
+    <string name="select_categories">Selectionnez les catégories de votre post</string>
+
+
+    <!--Ctegories-->
+
+
+    <string name="sport">Sport</string>
+    <string name="health">Santé</string>
+    <string name="Food">Cuisine</string>
+    <string name="political">Politique</string>
+    <string name="news">Informations</string>
+    <string name="gaming">Gaming</string>
+    <string name="finance">Finance</string>
+    <string name="music">Musique</string>
+    <string name="moovie">Films</string>
+    <string name="fashion">Fashion</string>
+    <string name="travel">Voyages</string>
 </resources>
