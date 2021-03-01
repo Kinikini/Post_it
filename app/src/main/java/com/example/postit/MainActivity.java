@@ -57,41 +57,43 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
         firebaseFirestore.enableNetwork();
-        mainBottomNav = (BottomNavigationView) findViewById(R.id.mainBottomNav);
+        if(mAuth.getCurrentUser() != null){
+            mainBottomNav = (BottomNavigationView) findViewById(R.id.mainBottomNav);
 
-        //FRAGMENTS
-        homeFragment = new HomeFragment();
-        notificationFragment = new NotificationFragment();
-        accountFragment = new AccountFragment();
+            //FRAGMENTS
+            homeFragment = new HomeFragment();
+            notificationFragment = new NotificationFragment();
+            accountFragment = new AccountFragment();
 
 
+            replaceFragment(homeFragment);
+            mainBottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(MenuItem item) {
 
-        mainBottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(MenuItem item) {
+                    switch (item.getItemId())
+                    {
+                        case R.id.bottom_action_home:
+                            replaceFragment(homeFragment);
+                            return true;
 
-                switch (item.getItemId())
-                {
-                    case R.id.bottom_action_home:
-                        replaceFragment(homeFragment);
-                        return true;
+                        case R.id.bottom_action_notification:
+                            replaceFragment(notificationFragment);
+                            return true;
 
-                    case R.id.bottom_action_notification:
-                        replaceFragment(notificationFragment);
-                        return true;
+                        case R.id.bottom_action_account:
+                            replaceFragment(accountFragment);
+                            return true;
+                        default:
+                            return false;
 
-                    case R.id.bottom_action_account:
-                        replaceFragment(accountFragment);
-                        return true;
-                    default:
-                        return false;
+                    }
+
+
 
                 }
-
-
-
-            }
-        });
+            });
+        }
 
 
 
@@ -132,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
 
-                    replaceFragment(homeFragment);
+                    //replaceFragment(homeFragment);
                     if (task.isSuccessful()){
 
                         if (!task.getResult().exists()){

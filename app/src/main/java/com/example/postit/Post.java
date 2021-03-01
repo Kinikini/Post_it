@@ -1,16 +1,18 @@
 package com.example.postit;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 public class Post  {
 
-    public Post(String user_id, String content, String title, String image_url, String categories, Boolean published) {
+    public Post(String user_id, String content, String title, String image_url, String categories, Boolean published,Date timestamp) {
         this.user_id = user_id;
         this.content = content;
         this.title = title;
         this.image_url = image_url;
         this.categories = categories;
         this.published = published;
+        this.timestamp = timestamp;
     }
 
     public String getUser_id() {
@@ -40,7 +42,18 @@ public class Post  {
     public String user_id;
     public String content, title;
     public String image_url;
-    //public Timestamp timestamp;
+
+    public Date getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Date timestamp) {
+        this.timestamp = timestamp;
+    }
+
+
+
+    public Date timestamp;
     public String categories;
     public Boolean published;
 

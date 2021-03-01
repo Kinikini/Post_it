@@ -10,10 +10,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import org.w3c.dom.DocumentType;
@@ -60,17 +63,25 @@ public class HomeFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);// Inflate the layout for this fragment
 
+
         blog_list = new ArrayList<>();
         blog_list_view = view.findViewById(R.id.blog_list_view);
         blogRecyclerAdapter = new BlogRecyclerAdapter(blog_list);
         blog_list_view.setLayoutManager(new LinearLayoutManager(getActivity()));
         blog_list_view.setAdapter(blogRecyclerAdapter);
 
+
+
         firebaseFirestore = FirebaseFirestore.getInstance();
 
-        firebaseFirestore.collection("Posts").addSnapshotListener(new EventListener<QuerySnapshot>() {
+        Query firstQuery = firebaseFirestore.collection("Posts")
+                .orderBy("timestamp",Query.Direction.DESCENDING)
+                .limit(5);
+
+        firstQuery.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(QuerySnapshot queryDocumentSnapshots, FirebaseFirestoreException e) {
+
                 for(DocumentChange doc: queryDocumentSnapshots.getDocumentChanges())
                 {
                     if(doc.getType() == DocumentChange.Type.ADDED)
@@ -85,4 +96,7 @@ public class HomeFragment extends Fragment {
 
         return view;
     }
+
+
+
 }

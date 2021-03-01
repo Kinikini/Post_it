@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,7 +31,9 @@ import com.google.firebase.storage.UploadTask;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
+import java.lang.reflect.Field;
 import java.security.SecureRandom;
+import java.security.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -237,11 +240,21 @@ public class NewPostActivity extends AppCompatActivity {
 
 
                     final StorageReference imagePath = storageReference.child("post_images").child(randomName+".jpg");
-                    imagePath.putFile(postImageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                    UploadTask uploadTask = imagePath.putFile(postImageUri);
+
+                    uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                         @Override
-                        public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                            if(task.isSuccessful())
-                            {
+                        public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                            if (!task.isSuccessful()) {
+                                throw task.getException();
+                            }
+
+                            return imagePath.getDownloadUrl();
+                        }
+                    }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Uri> task) {
+                            if (task.isSuccessful()) {
                                 String downloadUri = task.getResult().toString();
 
                                 Map<String, Object> postMap = new HashMap<>();
@@ -256,7 +269,7 @@ public class NewPostActivity extends AppCompatActivity {
                                 postMap.put("categories",post_categories);
                                 postMap.put("image_url",downloadUri);
                                 postMap.put("user_id",current_user_id);
-                                //postMap.put("timestamp", FieldValue.serverTimestamp());
+                                postMap.put("timestamp", FieldValue.serverTimestamp());
 
 
                                 firebaseFirestore.collection("Posts").add(postMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
@@ -284,6 +297,11 @@ public class NewPostActivity extends AppCompatActivity {
                             {
 
                             }
+
+
+
+
+
 
                         }
                     });
