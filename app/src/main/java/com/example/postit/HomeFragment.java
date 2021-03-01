@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentChange;
@@ -42,6 +44,8 @@ public class HomeFragment extends Fragment {
 
     private FirebaseFirestore firebaseFirestore;
     private BlogRecyclerAdapter blogRecyclerAdapter;
+
+
 
     public HomeFragment() {
         // Required empty public constructor
@@ -86,7 +90,8 @@ public class HomeFragment extends Fragment {
                 {
                     if(doc.getType() == DocumentChange.Type.ADDED)
                     {
-                        Post post = doc.getDocument().toObject(Post.class);
+                        String postId = doc.getDocument().getId();
+                        Post post = doc.getDocument().toObject(Post.class).withId(postId);
                         blog_list.add(post);
                         blogRecyclerAdapter.notifyDataSetChanged();
                     }

@@ -13,4 +13,8 @@
     <color name="whiteCardColor">#fff</color>
     <color name="orange">#FFA500</color>
     <color name="black">#000000</color>
+
+    <color name="whiteTransparentHalf">#80ffffff</color>
+    <color name="likeBtnGray">#747474</color>
+    <color name="likeBtnAccent">#f44336</color>
 </resources>

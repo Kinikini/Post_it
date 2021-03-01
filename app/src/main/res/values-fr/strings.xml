@@ -24,9 +24,9 @@
     <string name="bottom_ac_text">Compte</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="blog_post_date">Blog Post date</string>
-    <string name="username">Username</string>
-    <string name="content">Content</string>
+    <string name="blog_post_date">Date de publication</string>
+    <string name="username">Nom</string>
+    <string name="content">Contenu</string>
     <string name="textview">TextView</string>
     <string name="permission_denied">Autorisation non accordée</string>
 
@@ -41,7 +41,7 @@
     <string name="login_signup_hint">Pas inscirt? S\'inscrire</string>
 
     <string name="setting_updated">Paramètres mis à jour!</string>
-    <string name="post_content">Your text here</string>
+    <string name="post_content">Votre texte ici</string>
     <string name="post_title_here">Title</string>
     <string name="cancel">Annuler</string>
     <string name="clear_all">Tout effacer</string>
@@ -65,6 +65,7 @@
     <string name="fashion">Fashion</string>
     <string name="travel">Voyages</string>
     <string name="other">Autre</string>
-    <string name="fill_image">Please provide an image</string>
-    <string name="fill_categorie">Please check at least one category</string>
+    <string name="fill_image">Veuillez fournir une image</string>
+    <string name="fill_categorie">Veuillez cocher au moins une catégorie</string>
+    <string name="likes">J\'aime</string>
 </resources>

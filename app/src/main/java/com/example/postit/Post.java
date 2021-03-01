@@ -3,7 +3,7 @@ package com.example.postit;
 import java.sql.Timestamp;
 import java.util.Date;
 
-public class Post  {
+public class Post  extends PostId{
 
     public Post(String user_id, String content, String title, String image_url, String categories, Boolean published,Date timestamp) {
         this.user_id = user_id;

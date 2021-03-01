@@ -1,6 +1,7 @@
 package com.example.postit;
 
 import android.content.Context;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,19 +9,29 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Nullable;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -29,6 +40,9 @@ public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapte
     public List<Post> blog_list;
     public Context context;
     private FirebaseFirestore firebaseFirestore;
+    private FirebaseAuth firebaseAuth;
+
+
 
     public BlogRecyclerAdapter(List<Post> blog_list){
         this.blog_list = blog_list;
@@ -41,11 +55,21 @@ public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapte
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.blog_list_item,parent,false);
         context = parent.getContext();
         firebaseFirestore = FirebaseFirestore.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
+
+        holder.setIsRecyclable(false);
+
+        final String postId = blog_list.get(position).postId;
+
+        final String current_user_id = firebaseAuth.getCurrentUser().getUid();
+
+
+
         String content_data = blog_list.get(position).getContent();
         holder.setContentText(content_data);
 
@@ -87,6 +111,62 @@ public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapte
         String date_string = df.format(milliseconds);
         holder.setTimestampView(date_string);
 
+        firebaseFirestore.collection("Posts/"+postId+"/Likes").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+                if(!queryDocumentSnapshots.isEmpty())
+                {
+                    holder.setLikesCountView(queryDocumentSnapshots.size());
+                }
+                else
+                {
+                    holder.setLikesCountView(0);
+                }
+            }
+        });
+
+        firebaseFirestore.collection("Posts/"+postId+"/Likes").document(current_user_id).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+                if(documentSnapshot.exists())
+                {
+                    holder.post_like_btn.setImageDrawable(context.getDrawable(R.mipmap.action_like_accent));
+
+                }
+                else
+                {
+                    holder.post_like_btn.setImageDrawable(context.getDrawable(R.mipmap.action_like_gray));
+                }
+            }
+        });
+
+        holder.post_like_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                firebaseFirestore.collection("Posts/"+postId+"/Likes").document(current_user_id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if(!task.getResult().exists())
+                        {
+                            Map<String,Object> likesMap = new HashMap<>();
+
+                            likesMap.put("timestamp", FieldValue.serverTimestamp());
+                            firebaseFirestore.collection("Posts/"+postId+"/Likes").document(current_user_id).set(likesMap);
+                        }
+                        else
+                        {
+                            firebaseFirestore.collection("Posts/"+postId+"/Likes").document(current_user_id).delete();
+                        }
+                    }
+                });
+
+
+
+            }
+        });
+
     }
 
     @Override
@@ -108,10 +188,18 @@ public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapte
 
         private TextView timestampView;
 
+
+        private ImageView post_like_btn;
+        private TextView post_like_count;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
+
+
             mView = itemView;
+
+            post_like_btn = mView.findViewById(R.id.post_like_btn);
         }
 
         public void setContentText(String text){
@@ -157,6 +245,15 @@ public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapte
             RequestOptions placeholderOptions = new RequestOptions();
             placeholderOptions.placeholder(R.drawable.profile_placeholder);
             Glide.with(context).applyDefaultRequestOptions(placeholderOptions).load(image).into(authorProfilView);
+        }
+
+        public void setLikesCountView(int likes)
+        {
+            post_like_count = mView.findViewById(R.id.post_like_count);
+
+
+
+            post_like_count.setText(likes+" "+context.getResources().getString(R.string.likes).toString());
         }
     }
 

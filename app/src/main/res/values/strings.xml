@@ -66,4 +66,5 @@
     <string name="other">Other</string>
     <string name="fill_image">Please provide an image</string>
     <string name="fill_categorie">Please check at least one category</string>
+    <string name="likes">Likes</string>
 </resources>
