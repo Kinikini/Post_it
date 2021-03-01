@@ -1,17 +1,20 @@
 package com.example.postit;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,28 +22,40 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
 
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
+
+import id.zelory.compressor.Compressor;
 
 public class NewPostActivity extends AppCompatActivity {
 
     private Toolbar newPostToolbar;
 
     private EditText postContent;
-    private EditText postTags;
+    private EditText postTitle;
+    private TextView postCategories;
+    private ImageView postImage;
     private Button submitPost;
 
     private StorageReference storageReference;
     private FirebaseFirestore firebaseFirestore;
     private FirebaseAuth firebaseAuth;
     private String current_user_id;
+
+    private Uri postImageUri;
 
     private Toolbar go_back;
 
@@ -58,6 +73,8 @@ public class NewPostActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_post);
 
@@ -142,7 +159,7 @@ public class NewPostActivity extends AppCompatActivity {
                         {
                             selectedCategories[i]=false;
                             categorieList.clear();
-                            categories.setText("");
+                            categories.setText("".toString());
                         }
                     }
                 });
@@ -168,7 +185,11 @@ public class NewPostActivity extends AppCompatActivity {
 
         postContent = (EditText)findViewById(R.id.post_content);
 
-        postTags = (EditText)findViewById(R.id.post_title);
+        postTitle = (EditText)findViewById(R.id.post_title);
+
+
+        postImage = (ImageView)findViewById(R.id.post_image);
+
 
         submitPost = (Button)findViewById(R.id.submit_post);
 
@@ -184,45 +205,101 @@ public class NewPostActivity extends AppCompatActivity {
         });
 
 
+        postImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CropImage.activity()
+                        .setGuidelines(CropImageView.Guidelines.ON)
+                        .setMinCropResultSize(512,512)
+                        .setAspectRatio(1, 1)
+                        .start(NewPostActivity.this);
+            }
+        });
+
+
         submitPost.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v){
 
-                String content = postContent.getText().toString();
-                String tags = postTags.getText().toString();
+                final String content = postContent.getText().toString();
+                final String title = postTitle.getText().toString();
+                final String post_categories = categories.getText().toString();
 
-                if(!TextUtils.isEmpty(content) && !TextUtils.isEmpty(tags))
+                if(!TextUtils.isEmpty(content)
+                        && !TextUtils.isEmpty(title)
+                        && postImageUri != null
+                        && categories.getText().length()!=0)
                 {
-                    Map<String, Object> postMap = new HashMap<>();
-                    Boolean published = new Boolean(false);
 
 
-                    postMap.put("content", content);
-                    postMap.put("tags", tags);
-                    postMap.put("published",published);
-                    postMap.put("user_id",current_user_id);
-                    //postMap.put("timestamp", FieldValue.serverTimestamp());
+                    String randomName = randomString(18);;
 
-                    firebaseFirestore.collection("Posts").add(postMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+
+                    final StorageReference imagePath = storageReference.child("post_images").child(randomName+".jpg");
+                    imagePath.putFile(postImageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                         @Override
-                        public void onComplete(@NonNull Task<DocumentReference> task) {
-
+                        public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                             if(task.isSuccessful())
                             {
-                                Toast toast = Toast.makeText(getApplicationContext(),getResources().getString(R.string.submited_post_msg).toString(),Toast.LENGTH_LONG);
-                                toast.show();
+                                String downloadUri = task.getResult().toString();
 
-                                Intent mainIntent = new Intent(NewPostActivity.this,MainActivity.class);
-                                startActivity(mainIntent);
-                                finish();
+                                Map<String, Object> postMap = new HashMap<>();
+                                Boolean published = new Boolean(false);
+
+
+
+
+                                postMap.put("content", content);
+                                postMap.put("title", title);
+                                postMap.put("published",published);
+                                postMap.put("categories",post_categories);
+                                postMap.put("image_url",downloadUri);
+                                postMap.put("user_id",current_user_id);
+                                //postMap.put("timestamp", FieldValue.serverTimestamp());
+
+
+                                firebaseFirestore.collection("Posts").add(postMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DocumentReference> task) {
+
+                                        if(task.isSuccessful())
+                                        {
+                                            Toast toast = Toast.makeText(getApplicationContext(),getResources().getString(R.string.submited_post_msg).toString(),Toast.LENGTH_LONG);
+                                            toast.show();
+
+                                            Intent mainIntent = new Intent(NewPostActivity.this,MainActivity.class);
+                                            startActivity(mainIntent);
+                                            finish();
+                                        }
+                                        else
+                                        {
+
+                                        }
+                                    }
+                                });
+
                             }
                             else
                             {
 
                             }
+
                         }
                     });
+
+
+
+                }
+                else if(postImageUri == null)
+                {
+                    Toast toast = Toast.makeText(getApplicationContext(),getResources().getString(R.string.fill_image).toString(),Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+                else if(categories.getText().length()==0)
+                {
+                    Toast toast = Toast.makeText(getApplicationContext(),getResources().getString(R.string.fill_categorie).toString(),Toast.LENGTH_SHORT);
+                    toast.show();
                 }
                 else
                 {
@@ -234,4 +311,34 @@ public class NewPostActivity extends AppCompatActivity {
             }
         });
     }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            if (resultCode == RESULT_OK) {
+
+                postImageUri = result.getUri();
+                postImage.setImageURI(postImageUri);
+
+            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                Exception error = result.getError();
+            }
+        }
+    }
+
+    static final String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    static SecureRandom rnd = new SecureRandom();
+
+    String randomString(int len){
+        StringBuilder sb = new StringBuilder(len);
+        for(int i = 0; i < len; i++)
+            sb.append(AB.charAt(rnd.nextInt(AB.length())));
+        return sb.toString();
+    }
+
+
 }

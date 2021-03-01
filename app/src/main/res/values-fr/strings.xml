@@ -64,4 +64,7 @@
     <string name="moovie">Films</string>
     <string name="fashion">Fashion</string>
     <string name="travel">Voyages</string>
+    <string name="other">Autre</string>
+    <string name="fill_image">Please provide an image</string>
+    <string name="fill_categorie">Please check at least one category</string>
 </resources>

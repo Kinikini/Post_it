@@ -4,60 +4,48 @@ import java.sql.Timestamp;
 
 public class Post  {
 
-    public String user_id;
-    public String content;
-    public String tags;
-    //public Timestamp timestamp;
-    public Boolean published;
-
-    public Post() {
-    }
-
-    public Post(String content, Boolean published, String tags/*, Timestamp timestamp*/, String user_id) {
+    public Post(String user_id, String content, String title, String image_url, String categories, Boolean published) {
         this.user_id = user_id;
         this.content = content;
-        this.tags = tags;
-        //this.timestamp = timestamp;
-        //this.published = published;
+        this.title = title;
+        this.image_url = image_url;
+        this.categories = categories;
+        this.published = published;
     }
 
     public String getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
-    }
-
-    public String getPost_content() {
+    public String getContent() {
         return content;
     }
 
-    public void setPost_content(String post_content) {
-        this.content = post_content;
+    public String getTitle() {
+        return title;
     }
 
-    public String getTags() {
-        return tags;
+    public String getImage_url() {
+        return image_url;
     }
 
-    public void setTags(String tags) {
-        tags = tags;
+    public String getCategories() {
+        return categories;
     }
-
-    /*public Timestamp getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(Timestamp timestamp) {
-        this.timestamp = timestamp;
-    }*/
 
     public Boolean getPublished() {
         return published;
     }
 
-    public void setPublished(Boolean published) {
-        this.published = published;
+    public String user_id;
+    public String content, title;
+    public String image_url;
+    //public Timestamp timestamp;
+    public String categories;
+    public Boolean published;
+
+    public Post() {
     }
+
+
 }
