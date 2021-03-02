@@ -2,6 +2,7 @@ package com.example.postit;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
@@ -11,23 +12,30 @@ import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
 
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     private Toolbar mainToolbar;
     private FirebaseAuth mAuth;
@@ -39,6 +47,16 @@ public class MainActivity extends AppCompatActivity {
     private HomeFragment homeFragment;
     private NotificationFragment notificationFragment;
     private AccountFragment accountFragment;
+
+    private Toolbar toolbar;
+
+    private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
+
+    private ImageView ProfilView;
+    private TextView UserNameView;
+
+
 
 
     @Nullable
@@ -53,12 +71,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        boolean is_admin =true;
+
+
+
+
+
 
         mAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
         firebaseFirestore.enableNetwork();
         if(mAuth.getCurrentUser() != null){
-            mainBottomNav = (BottomNavigationView) findViewById(R.id.mainBottomNav);
+            //mainBottomNav = (BottomNavigationView) findViewById(R.id.mainBottomNav);
 
             //FRAGMENTS
             homeFragment = new HomeFragment();
@@ -67,7 +91,36 @@ public class MainActivity extends AppCompatActivity {
 
 
             replaceFragment(homeFragment);
-            mainBottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+
+            toolbar = findViewById(R.id.main_toolbar);
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setTitle("Post it");
+
+            drawerLayout = findViewById(R.id.drawer_layout);
+            navigationView = findViewById(R.id.nav_view);
+
+            if(is_admin)
+            {
+                navigationView.getMenu().clear();
+                navigationView.inflateMenu(R.menu.admin_panel);
+            }
+
+            ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(
+                    this,
+                    drawerLayout,
+                    toolbar,
+                    R.string.openNavDrawer,
+                    R.string.closeNavDrawer
+            );
+
+            drawerLayout.addDrawerListener(actionBarDrawerToggle);
+            actionBarDrawerToggle.syncState();
+
+            navigationView.bringToFront();
+
+
+            navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(MenuItem item) {
 
@@ -84,6 +137,18 @@ public class MainActivity extends AppCompatActivity {
                         case R.id.bottom_action_account:
                             replaceFragment(accountFragment);
                             return true;
+                        case R.id.action_logout_button:
+
+                            logOut();
+                            return true;
+
+
+                        case R.id.action_setting_button:
+
+                            Intent settingsIntent = new Intent(MainActivity.this, SetupActivity.class);
+                            startActivity(settingsIntent);
+
+                            return true;
                         default:
                             return false;
 
@@ -92,14 +157,30 @@ public class MainActivity extends AppCompatActivity {
 
 
                 }
+
+
+            });
+
+
+            String user_id = mAuth.getUid();
+            firebaseFirestore.collection("Users").document(user_id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        String userName = task.getResult().getString("name");
+                        String userImage = task.getResult().getString("image");
+
+                        setUserNameView(userName);
+                        setAuthorProfilView(userImage);
+
+
+                    }
+                }
             });
         }
 
 
 
-        mainToolbar = findViewById(R.id.main_toolbar);
-        setSupportActionBar(mainToolbar);
-        getSupportActionBar().setTitle("Post it");
 
         addPostBtn = findViewById(R.id.add_post_btn);
 
@@ -139,10 +220,10 @@ public class MainActivity extends AppCompatActivity {
 
                         if (!task.getResult().exists()){
 
-                                Intent setupIntent = new Intent(MainActivity.this, SetupActivity.class);
-                                startActivity(setupIntent);
+                            Intent setupIntent = new Intent(MainActivity.this, SetupActivity.class);
+                            startActivity(setupIntent);
 
-                                finish();
+                            finish();
 
                         }
 
@@ -178,7 +259,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_logout_button:
 
                 logOut();
-               return true;
+                return true;
 
 
             case R.id.action_setting_button:
@@ -217,5 +298,31 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.main_container,fragment);
         fragmentTransaction.commit();
     }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        return false;
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
+    }
+
+    public void setUserNameView(String name)
+    {
+        UserNameView = findViewById(R.id.username);
+        UserNameView.setText(name);
+    }
+
+    public void setAuthorProfilView(String image)
+    {
+        ProfilView = findViewById(R.id.user_profil);
+        RequestOptions placeholderOptions = new RequestOptions();
+        placeholderOptions.placeholder(R.drawable.user_image);
+        Glide.with(MainActivity.this).applyDefaultRequestOptions(placeholderOptions).load(image).into(ProfilView);
+    }
+
+
 
 }

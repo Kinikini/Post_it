@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/administration_space"
+        android:enabled="true"
+        android:icon="@drawable/baseline_admin_panel_settings_black_24"
+        android:title="@string/administration_space"
+        app:showAsAction="ifRoom" />
+
+
+
+    <item android:title="@string/menu">
+        <menu>
+            <item
+                android:id="@+id/bottom_action_home"
+                android:enabled="true"
+                android:icon="@drawable/baseline_home_black_24"
+                android:title="@string/bottom_home_text"
+                app:showAsAction="ifRoom" />
+
+            <item
+                android:id="@+id/bottom_action_notification"
+                android:icon="@drawable/baseline_notifications_black_24"
+                android:title="@string/bottom_notifications_text"
+                app:showAsAction="always" />
+            <item
+                android:id="@+id/bottom_action_account"
+                android:icon="@drawable/baseline_person_black_24"
+                android:title="@string/bottom_ac_text"
+                app:showAsAction="always" />
+        </menu>
+    </item>
+
+
+
+
+    <item android:title="@string/action_setting_text"
+        android:id="@+id/action_setting_button"
+        android:icon="@drawable/ic_baseline_settings_applications_24" />
+    <item android:title="@string/action_logout_text"
+        android:id="@+id/action_logout_button"
+        android:icon="@drawable/ic_baseline_power_settings_new_24" />
+
+</menu>

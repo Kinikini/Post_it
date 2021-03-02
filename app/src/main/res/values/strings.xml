@@ -67,4 +67,14 @@
     <string name="fill_image">Please provide an image</string>
     <string name="fill_categorie">Please check at least one category</string>
     <string name="likes">Likes</string>
+
+
+    <string name="my_files">My Files</string>
+    <string name="shared">Shared</string>
+
+    <string name="openNavDrawer">Navigation Drawer Open</string>
+    <string name="closeNavDrawer">Navigation Drawer Close</string>
+
+    <string name="administration_space">Admin panel</string>
+    <string name="menu">Menu</string>
 </resources>

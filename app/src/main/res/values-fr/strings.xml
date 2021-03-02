@@ -68,4 +68,15 @@
     <string name="fill_image">Veuillez fournir une image</string>
     <string name="fill_categorie">Veuillez cocher au moins une catégorie</string>
     <string name="likes">J\'aime</string>
+
+
+
+    <string name="my_files">My Files</string>
+    <string name="shared">Shared</string>
+
+    <string name="openNavDrawer">Navigation Drawer Open</string>
+    <string name="closeNavDrawer">Navigation Drawer Close</string>
+
+    <string name="administration_space">Espace d\'administration</string>
+    <string name="menu">Menu</string>
 </resources>

@@ -17,4 +17,6 @@
     <color name="whiteTransparentHalf">#80ffffff</color>
     <color name="likeBtnGray">#747474</color>
     <color name="likeBtnAccent">#f44336</color>
+
+    <color name="appBlue">#03A9F4</color>
 </resources>
