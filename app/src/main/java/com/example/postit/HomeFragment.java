@@ -79,8 +79,7 @@ public class HomeFragment extends Fragment {
         firebaseFirestore = FirebaseFirestore.getInstance();
 
         Query firstQuery = firebaseFirestore.collection("Posts")
-                .orderBy("timestamp",Query.Direction.DESCENDING)
-                .limit(5);
+                .orderBy("timestamp",Query.Direction.DESCENDING);
 
         firstQuery.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override

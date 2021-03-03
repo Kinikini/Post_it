@@ -1,6 +1,7 @@
 package com.example.postit;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FieldValue;
@@ -41,6 +43,7 @@ public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapte
     public Context context;
     private FirebaseFirestore firebaseFirestore;
     private FirebaseAuth firebaseAuth;
+
 
 
 
@@ -125,6 +128,20 @@ public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapte
             }
         });
 
+        firebaseFirestore.collection("Posts/"+postId+"/Comments").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+                if(!queryDocumentSnapshots.isEmpty())
+                {
+                    holder.setCommentsCountView(queryDocumentSnapshots.size());
+                }
+                else
+                {
+                    holder.setCommentsCountView(0);
+                }
+            }
+        });
+
         firebaseFirestore.collection("Posts/"+postId+"/Likes").document(current_user_id).addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
@@ -145,6 +162,8 @@ public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapte
             @Override
             public void onClick(View v) {
 
+
+
                 firebaseFirestore.collection("Posts/"+postId+"/Likes").document(current_user_id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -154,6 +173,54 @@ public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapte
 
                             likesMap.put("timestamp", FieldValue.serverTimestamp());
                             firebaseFirestore.collection("Posts/"+postId+"/Likes").document(current_user_id).set(likesMap);
+
+                            firebaseFirestore.collection("Users")
+                                    .document(current_user_id).get()
+                                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                            if (task.isSuccessful()) {
+                                                final String commentUserName = task.getResult().getString("name");
+
+
+                                                firebaseFirestore.collection("Posts/")
+                                                        .document(postId).get()
+                                                        .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                            @Override
+                                                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                                if (task.isSuccessful()) {
+
+
+                                                                    final String postUserId = task.getResult().getString("user_id");
+
+                                                                    if (!postUserId.equals(current_user_id))
+                                                                    {
+
+                                                                        final String notification_message = commentUserName + " " + context.getResources().getString(R.string.notification_like_message).toString();
+
+                                                                        Map<String, Object> notificationsMap = new HashMap<>();
+                                                                        notificationsMap.put("notification_message", notification_message);
+                                                                        notificationsMap.put("post_id", postId);
+                                                                        notificationsMap.put("timestamp", FieldValue.serverTimestamp());
+                                                                        firebaseFirestore.collection("Users/" + postUserId + "/Notifications")
+                                                                                .add(notificationsMap)
+                                                                                .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                                                                                    @Override
+                                                                                    public void onComplete(@NonNull Task<DocumentReference> task) {
+                                                                                        if (task.isSuccessful()) {
+
+                                                                                        }
+                                                                                    }
+                                                                                });
+
+                                                                    }
+                                                                }
+                                                            }
+                                                        });
+
+                                            }
+                                        }
+                                    });
                         }
                         else
                         {
@@ -164,6 +231,100 @@ public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapte
 
 
 
+            }
+        });
+
+        holder.post_like_count.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                firebaseFirestore.collection("Posts/"+postId+"/Likes").document(current_user_id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if(!task.getResult().exists())
+                        {
+                            Map<String,Object> likesMap = new HashMap<>();
+
+                            likesMap.put("timestamp", FieldValue.serverTimestamp());
+                            firebaseFirestore.collection("Posts/"+postId+"/Likes").document(current_user_id).set(likesMap);
+
+                            firebaseFirestore.collection("Users")
+                                    .document(current_user_id).get()
+                                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                            if (task.isSuccessful()) {
+                                                final String commentUserName = task.getResult().getString("name");
+
+
+                                                firebaseFirestore.collection("Posts/")
+                                                        .document(postId).get()
+                                                        .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                            @Override
+                                                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                                if (task.isSuccessful()) {
+
+
+                                                                    final String postUserId = task.getResult().getString("user_id");
+
+                                                                    if (!postUserId.equals(current_user_id))
+                                                                    {
+
+                                                                        final String notification_message = commentUserName + " " + context.getResources().getString(R.string.notification_like_message).toString();
+
+                                                                        Map<String, Object> notificationsMap = new HashMap<>();
+                                                                        notificationsMap.put("notification_message", notification_message);
+                                                                        notificationsMap.put("post_id", postId);
+                                                                        notificationsMap.put("timestamp", FieldValue.serverTimestamp());
+                                                                        firebaseFirestore.collection("Users/" + postUserId + "/Notifications")
+                                                                                .add(notificationsMap)
+                                                                                .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                                                                                    @Override
+                                                                                    public void onComplete(@NonNull Task<DocumentReference> task) {
+                                                                                        if (task.isSuccessful()) {
+
+                                                                                        }
+                                                                                    }
+                                                                                });
+
+                                                                    }
+                                                                }
+                                                            }
+                                                        });
+
+                                            }
+                                        }
+                                    });
+
+
+
+                        }
+                        else
+                        {
+                            firebaseFirestore.collection("Posts/"+postId+"/Likes").document(current_user_id).delete();
+                        }
+
+
+                    }
+                });
+
+            }
+        });
+
+        holder.post_comment_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent commentIntent = new Intent(context, CommentsActivity.class);
+                commentIntent.putExtra("blogPostId",postId);
+                context.startActivity(commentIntent);
+            }
+        });
+
+        holder.post_comment_count.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent commentIntent = new Intent(context, CommentsActivity.class);
+                commentIntent.putExtra("blogPostId",postId);
+                context.startActivity(commentIntent);
             }
         });
 
@@ -191,6 +352,9 @@ public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapte
 
         private ImageView post_like_btn;
         private TextView post_like_count;
+        private ImageView post_comment_btn;
+        private TextView post_comment_count;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -200,6 +364,9 @@ public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapte
             mView = itemView;
 
             post_like_btn = mView.findViewById(R.id.post_like_btn);
+            post_comment_btn = mView.findViewById(R.id.post_comment_btn);
+            post_comment_count = mView.findViewById(R.id.post_comment_count);
+            post_like_count = mView.findViewById(R.id.post_like_count);
         }
 
         public void setContentText(String text){
@@ -254,6 +421,15 @@ public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapte
 
 
             post_like_count.setText(likes+" "+context.getResources().getString(R.string.likes).toString());
+        }
+
+        public void setCommentsCountView(int likes)
+        {
+            post_comment_count = mView.findViewById(R.id.post_comment_count);
+
+
+
+            post_comment_count.setText(likes+" "+context.getResources().getString(R.string.comments).toString());
         }
     }
 

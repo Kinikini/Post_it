@@ -3,10 +3,26 @@ package com.example.postit;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.postit.Notification;
+import com.example.postit.NotificationsRecyclerAdapter;
+import com.example.postit.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +39,14 @@ public class NotificationFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+
+    private RecyclerView notification_list_view;
+    private List<Notification> notification_list;
+
+    private FirebaseFirestore firebaseFirestore;
+    private FirebaseAuth firebaseAuth;
+    private NotificationsRecyclerAdapter notificationsRecyclerAdapter;
 
     public NotificationFragment() {
         // Required empty public constructor
@@ -59,6 +83,40 @@ public class NotificationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_notification, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_notification, container, false);// Inflate the layout for this fragment
+
+
+        notification_list = new ArrayList<>();
+        notification_list_view = view.findViewById(R.id.notification_list_view);
+        notificationsRecyclerAdapter = new NotificationsRecyclerAdapter(notification_list);
+        notification_list_view.setLayoutManager(new LinearLayoutManager(getActivity()));
+        notification_list_view.setAdapter(notificationsRecyclerAdapter);
+
+        firebaseFirestore = FirebaseFirestore.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
+
+        Query firstQuery = firebaseFirestore.collection("Users/"+firebaseAuth.getCurrentUser().getUid()+"/Notifications")
+                .orderBy("timestamp",Query.Direction.DESCENDING);
+
+        firstQuery.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(QuerySnapshot queryDocumentSnapshots, FirebaseFirestoreException e) {
+
+                for(DocumentChange doc: queryDocumentSnapshots.getDocumentChanges())
+                {
+                    if(doc.getType() == DocumentChange.Type.ADDED)
+                    {
+                        String notificationId = doc.getDocument().getId();
+                        Notification notification = doc.getDocument().toObject(Notification.class);
+                        notification_list.add(notification);
+                        notificationsRecyclerAdapter.notifyDataSetChanged();
+                    }
+                }
+            }
+        });
+        
+        
+        return view;
     }
 }

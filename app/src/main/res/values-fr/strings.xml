@@ -81,4 +81,6 @@
     <string name="menu">Menu</string>
     <string name="comments">Commentaires:</string>
     <string name="your_comment_here">Your comment here...</string>
+    <string name="notification_comment_message">a commenté votre publication</string>
+    <string name="notification_like_message">a aimé votre publication.</string>
 </resources>

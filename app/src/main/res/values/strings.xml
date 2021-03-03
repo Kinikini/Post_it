@@ -80,4 +80,6 @@
 
     <string name="comments">Comments:</string>
     <string name="your_comment_here">Your comment here...</string>
+    <string name="notification_comment_message">commented on your publication</string>
+    <string name="notification_like_message">liked your publication.</string>
 </resources>
