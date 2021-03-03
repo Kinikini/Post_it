@@ -44,7 +44,7 @@
                 android:id="@+id/postDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
                 android:text="@string/blog_post_date"
                 app:layout_constraintStart_toEndOf="@+id/authorProfile"
                 app:layout_constraintTop_toBottomOf="@+id/postUsername" />
@@ -118,13 +118,37 @@
                 android:id="@+id/post_like_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginBottom="8dp"
                 android:text="0 Likes"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/post_like_btn"
                 app:layout_constraintTop_toBottomOf="@+id/postContent"
                 app:layout_constraintVertical_bias="1.0" />
+
+            <ImageView
+                android:id="@+id/post_comment_btn"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="44dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/post_like_count"
+                app:layout_constraintTop_toBottomOf="@+id/postContent"
+                app:layout_constraintVertical_bias="1.0"
+                app:srcCompat="@mipmap/action_comment" />
+
+            <TextView
+                android:id="@+id/post_comment_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                android:text="TextView"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/post_comment_btn"
+                app:layout_constraintTop_toBottomOf="@+id/postContent"
+                app:layout_constraintVertical_bias="0.954" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

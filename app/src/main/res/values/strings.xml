@@ -77,4 +77,7 @@
 
     <string name="administration_space">Admin panel</string>
     <string name="menu">Menu</string>
+
+    <string name="comments">Comments:</string>
+    <string name="your_comment_here">Your comment here...</string>
 </resources>

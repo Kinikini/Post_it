@@ -79,4 +79,6 @@
 
     <string name="administration_space">Espace d\'administration</string>
     <string name="menu">Menu</string>
+    <string name="comments">Commentaires:</string>
+    <string name="your_comment_here">Your comment here...</string>
 </resources>
