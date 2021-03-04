@@ -82,4 +82,9 @@
     <string name="your_comment_here">Your comment here...</string>
     <string name="notification_comment_message">commented on your publication</string>
     <string name="notification_like_message">liked your publication.</string>
+    <string name="user_administration">User management</string>
+    <string name="create_admin">Create administarator</string>
+    <string name="create_user">Create user</string>
+    <string name="ban_user">Ban user</string>
+    <string name="unpublished_publication">Unpublished</string>
 </resources>

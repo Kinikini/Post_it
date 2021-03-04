@@ -142,11 +142,12 @@ public class CommentsActivity extends AppCompatActivity {
                                                                         if (!postUserId.equals(currentUserId))
                                                                         {
 
-                                                                            final String notification_message = commentUserName + " " + getResources().getString(R.string.notification_comment_message).toString();
+                                                                            final String notification_message = "comment";
 
                                                                             Map<String, Object> notificationsMap = new HashMap<>();
                                                                             notificationsMap.put("notification_message", notification_message);
                                                                             notificationsMap.put("post_id", blogPostId);
+                                                                            notificationsMap.put("action_id",currentUserId);
                                                                             notificationsMap.put("timestamp", FieldValue.serverTimestamp());
                                                                             firebaseFirestore.collection("Users/" + postUserId + "/Notifications")
                                                                                     .add(notificationsMap)

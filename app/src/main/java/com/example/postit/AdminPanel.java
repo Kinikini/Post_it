@@ -39,7 +39,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class AdminPanel extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     private Toolbar mainToolbar;
     private FirebaseAuth mAuth;
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_admin_panel);
 
 
 
@@ -86,27 +86,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if(mAuth.getCurrentUser() != null){
             //mainBottomNav = (BottomNavigationView) findViewById(R.id.mainBottomNav);
 
-            firebaseFirestore.collection("Admin")
-                    .document(mAuth.getCurrentUser().getUid())
-                    .get()
-                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
 
-                            if(task.isSuccessful())
-                            {
-                                DocumentSnapshot document = task.getResult();
-
-                                if(document.exists())
-                                {
-                                    navigationView.getMenu().clear();
-                                    navigationView.inflateMenu(R.menu.admin_panel);
-                                }
-
-                            }
-
-                        }
-                    });
 
 
 
@@ -128,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             /*if(is_admin)
             {
-                Toast.makeText(MainActivity.this,"is admin",Toast.LENGTH_LONG).show();
+                Toast.makeText(AdminPanel.this,"is admin",Toast.LENGTH_LONG).show();
                 navigationView.getMenu().clear();
                 navigationView.inflateMenu(R.menu.admin_panel);
             }*/
@@ -151,44 +131,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 @Override
                 public boolean onNavigationItemSelected(MenuItem item) {
 
-                    switch (item.getItemId())
-                    {
-                        case R.id.administration_space:
-                            Intent settingsIntent = new Intent(MainActivity.this, AdminPanel.class);
-                            startActivity(settingsIntent);
-
-                            return true;
-                        case R.id.bottom_action_home:
-                            replaceFragment(homeFragment);
-                            return true;
-
-                        case R.id.bottom_action_notification:
-                            replaceFragment(notificationFragment);
-                            return true;
-
-                        case R.id.bottom_action_account:
-                            replaceFragment(accountFragment);
-                            return true;
-                        case R.id.action_logout_button:
-
-                            logOut();
-                            return true;
-
-
-                        case R.id.action_setting_button:
-
-                            Intent adminIntent = new Intent(MainActivity.this, SetupActivity.class);
-                            startActivity(adminIntent);
-
-                            return true;
-                        default:
-                            return false;
+                    return false;
 
                     }
-
-
-
-                }
 
 
             });
@@ -220,7 +165,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View v) {
 
-                Intent newPostIntent = new Intent(MainActivity.this, NewPostActivity.class);
+                Intent newPostIntent = new Intent(AdminPanel.this, NewPostActivity.class);
                 startActivity(newPostIntent);
                 finish();
 
@@ -252,7 +197,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                         if (!task.getResult().exists()){
 
-                            Intent setupIntent = new Intent(MainActivity.this, SetupActivity.class);
+                            Intent setupIntent = new Intent(AdminPanel.this, SetupActivity.class);
                             startActivity(setupIntent);
 
                             finish();
@@ -262,7 +207,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     } else {
 
                         String errorMessage = task.getException().getMessage();
-                        Toast.makeText(MainActivity.this, "Error : " + errorMessage, Toast.LENGTH_LONG).show();
+                        Toast.makeText(AdminPanel.this, "Error : " + errorMessage, Toast.LENGTH_LONG).show();
 
 
                     }
@@ -296,7 +241,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             case R.id.action_setting_button:
 
-                Intent settingsIntent = new Intent(MainActivity.this, SetupActivity.class);
+                Intent settingsIntent = new Intent(AdminPanel.this, SetupActivity.class);
                 startActivity(settingsIntent);
 
                 return true;
@@ -318,7 +263,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void sendToLoginPage() {
 
-        Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
+        Intent loginIntent = new Intent(AdminPanel.this, LoginActivity.class);
         startActivity(loginIntent);
         finish();
 
@@ -352,7 +297,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ProfilView = findViewById(R.id.user_profil);
         RequestOptions placeholderOptions = new RequestOptions();
         placeholderOptions.placeholder(R.drawable.user_image);
-        Glide.with(MainActivity.this).applyDefaultRequestOptions(placeholderOptions).load(image).into(ProfilView);
+        Glide.with(AdminPanel.this).applyDefaultRequestOptions(placeholderOptions).load(image).into(ProfilView);
     }
 
 

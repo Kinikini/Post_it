@@ -44,6 +44,10 @@ public class NotificationsRecyclerAdapter extends RecyclerView.Adapter<Notificat
     private FirebaseAuth firebaseAuth;
     private TextView notificationMessageView;
 
+    private CircleImageView authorProfilView;
+    private TextView postUserNameView;
+    private TextView postTitleView;
+
 
 
 
@@ -67,10 +71,62 @@ public class NotificationsRecyclerAdapter extends RecyclerView.Adapter<Notificat
 
         holder.setIsRecyclable(false);
 
-        String notification_message = notification_list.get(position).getNotification_message();
 
-        holder.setNotificationText(notification_message);
 
+        String notification_type = notification_list.get(position).getNotification_message();
+
+        if(notification_type.equals("comment"))
+        {
+            holder.setNotificationText(context.getResources().getString(R.string.notification_comment_message).toString());
+        }
+        else
+        {
+            holder.setNotificationText(context.getResources().getString(R.string.notification_like_message).toString());
+        }
+
+
+        String action_id = notification_list.get(position).getAction_id();
+
+        String post_id = notification_list.get(position).getPost_id();
+
+        firebaseFirestore.collection("Users").document(action_id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful())
+                {
+                    String userName = task.getResult().getString("name");
+                    String userImage = task.getResult().getString("image");
+
+                    holder.setUserNameView(userName);
+                    holder.setAuthorProfilView(userImage);
+
+
+                }
+                else
+                {
+
+                }
+            }
+        });
+
+        firebaseFirestore.collection("Posts").document(post_id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful())
+                {
+                    String title = task.getResult().getString("title");
+
+
+                    holder.setPostTitleView(title);
+
+
+                }
+                else
+                {
+
+                }
+            }
+        });
 
     }
 
@@ -99,6 +155,26 @@ public class NotificationsRecyclerAdapter extends RecyclerView.Adapter<Notificat
             notificationMessageView.setText(text);
 
 
+        }
+
+        public void setAuthorProfilView(String image)
+        {
+            authorProfilView = mView.findViewById(R.id.notification_profil);
+            RequestOptions placeholderOptions = new RequestOptions();
+            placeholderOptions.placeholder(R.drawable.profile_placeholder);
+            Glide.with(context).applyDefaultRequestOptions(placeholderOptions).load(image).into(authorProfilView);
+        }
+
+        public void setUserNameView(String name)
+        {
+            postUserNameView = mView.findViewById(R.id.notification_user_name);
+            postUserNameView.setText(name);
+        }
+
+        public void setPostTitleView(String name)
+        {
+            postTitleView = mView.findViewById(R.id.notif_post_title);
+            postTitleView.setText(name);
         }
 
 

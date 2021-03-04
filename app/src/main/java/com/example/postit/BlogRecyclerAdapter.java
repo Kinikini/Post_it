@@ -196,11 +196,12 @@ public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapte
                                                                     if (!postUserId.equals(current_user_id))
                                                                     {
 
-                                                                        final String notification_message = commentUserName + " " + context.getResources().getString(R.string.notification_like_message).toString();
+                                                                        final String notification_message = "like";
 
                                                                         Map<String, Object> notificationsMap = new HashMap<>();
                                                                         notificationsMap.put("notification_message", notification_message);
                                                                         notificationsMap.put("post_id", postId);
+                                                                        notificationsMap.put("action_id",current_user_id);
                                                                         notificationsMap.put("timestamp", FieldValue.serverTimestamp());
                                                                         firebaseFirestore.collection("Users/" + postUserId + "/Notifications")
                                                                                 .add(notificationsMap)
@@ -269,7 +270,7 @@ public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapte
                                                                     if (!postUserId.equals(current_user_id))
                                                                     {
 
-                                                                        final String notification_message = commentUserName + " " + context.getResources().getString(R.string.notification_like_message).toString();
+                                                                        final String notification_message = "like";
 
                                                                         Map<String, Object> notificationsMap = new HashMap<>();
                                                                         notificationsMap.put("notification_message", notification_message);

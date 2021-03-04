@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+
+
+    <item
+        android:id="@+id/action_admin_unpublished"
+        android:title="@string/unpublished_publication"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_admin_notification"
+        android:icon="@drawable/baseline_notifications_black_24"
+        android:title="@string/bottom_notifications_text"
+        app:showAsAction="always" />
+
+
+
+    <item android:title="@string/user_administration">
+        <menu>
+            <item
+                android:id="@+id/action_create_admin"
+                android:enabled="true"
+                android:title="@string/create_admin"
+                app:showAsAction="ifRoom" />
+            <item
+                android:id="@+id/action_create_user"
+                android:enabled="true"
+                android:title="@string/create_user"
+                app:showAsAction="ifRoom" />
+
+            <item
+                android:id="@+id/action_ban_user"
+                android:enabled="true"
+                android:title="@string/ban_user"
+                app:showAsAction="ifRoom" />
+
+
+            <item
+                android:id="@+id/bottom_action_account"
+                android:icon="@drawable/baseline_person_black_24"
+                android:title="@string/bottom_ac_text"
+                app:showAsAction="always" />
+        </menu>
+    </item>
+
+
+
+
+    <item android:title="@string/action_setting_text"
+        android:id="@+id/action_setting_button"
+        android:icon="@drawable/ic_baseline_settings_applications_24" />
+    <item android:title="@string/action_logout_text"
+        android:id="@+id/action_logout_button"
+        android:icon="@drawable/ic_baseline_power_settings_new_24" />
+
+
+
+</menu>
