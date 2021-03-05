@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,6 +53,7 @@ public class NewPostActivity extends AppCompatActivity {
     private TextView postCategories;
     private ImageView postImage;
     private Button submitPost;
+    private ProgressBar progressBar;
 
     private StorageReference storageReference;
     private FirebaseFirestore firebaseFirestore;
@@ -82,6 +84,8 @@ public class NewPostActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_post);
 
         categories = findViewById(R.id.categories);
+        progressBar = findViewById(R.id.progressBar);
+        //progressBar.setVisibility(View.VISIBLE);
 
         categorieArray = new String[10];
 
@@ -306,24 +310,27 @@ public class NewPostActivity extends AppCompatActivity {
                         }
                     });
 
-
+                    progressBar.setVisibility(View.VISIBLE);
 
                 }
                 else if(postImageUri == null)
                 {
                     Toast toast = Toast.makeText(getApplicationContext(),getResources().getString(R.string.fill_image).toString(),Toast.LENGTH_SHORT);
                     toast.show();
+                    progressBar.setVisibility(View.INVISIBLE);
                 }
                 else if(categories.getText().length()==0)
                 {
                     Toast toast = Toast.makeText(getApplicationContext(),getResources().getString(R.string.fill_categorie).toString(),Toast.LENGTH_SHORT);
                     toast.show();
+                    progressBar.setVisibility(View.INVISIBLE);
                 }
                 else
                 {
 
                     Toast toast = Toast.makeText(getApplicationContext(),getResources().getString(R.string.unsubmited_post_msg).toString(),Toast.LENGTH_SHORT);
                     toast.show();
+                    progressBar.setVisibility(View.INVISIBLE);
                 }
 
             }

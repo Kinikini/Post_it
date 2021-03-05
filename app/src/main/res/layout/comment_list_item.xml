@@ -36,6 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
+                android:fontFamily="@font/poppins_medium"
                 android:text="@string/username"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/authorProfile"
@@ -46,9 +47,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:fontFamily="@font/poppins"
                 android:text="@string/blog_post_date"
                 app:layout_constraintStart_toEndOf="@+id/authorProfile"
-                app:layout_constraintTop_toBottomOf="@+id/commentUsername"/>
+                app:layout_constraintTop_toBottomOf="@+id/commentUsername" />
 
             <TextView
                 android:id="@+id/comment_message"
@@ -57,6 +59,7 @@
                 android:layout_marginStart="64dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="16dp"
+                android:fontFamily="@font/poppins"
                 android:text="TextView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"

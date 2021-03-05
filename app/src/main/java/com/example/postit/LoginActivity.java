@@ -46,6 +46,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                loginprogress.setVisibility(View.VISIBLE);
                 Intent regIntent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(regIntent);
 
@@ -65,14 +66,14 @@ public class LoginActivity extends AppCompatActivity {
 
                 if (!TextUtils.isEmpty(loginEmail) && !TextUtils.isEmpty(loginPass)){
 
-                    loginprogress.setVisibility(View.VISIBLE);
+                    //loginprogress.setVisibility(View.VISIBLE);
 
                     mAuth.signInWithEmailAndPassword(loginEmail, loginPass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
 
                             if (task.isSuccessful()){
-
+                                loginprogress.setVisibility(View.VISIBLE);
                                 sendToMain();
 
                             } else {
@@ -86,6 +87,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         }
                     });
+
 
                 }
 

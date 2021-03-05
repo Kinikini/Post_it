@@ -17,8 +17,9 @@
 
         <TextView
             style="@style/headerTextPrimary"
-            android:text="@string/register"
-            android:layout_marginTop="@dimen/loginViewsMargin"/>
+            android:layout_marginTop="@dimen/loginViewsMargin"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/register" />
 
 
 
@@ -26,48 +27,56 @@
         <com.google.android.material.textfield.TextInputLayout
             style="@style/parent"
             android:layout_marginTop="@dimen/signup_text_margin_top">
+
             <EditText
-                style="@style/modifiedEditText"
                 android:id="@+id/reg_email"
+                style="@style/modifiedEditText"
+                android:fontFamily="@font/poppins"
+                android:hint="@string/login_email_hint"
                 android:inputType="textEmailAddress"
-                android:maxLines="1"
-                android:hint="@string/login_email_hint"/>
+                android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/parent"
             android:layout_marginTop="@dimen/signup_text_margin_top">
+
             <EditText
-                style="@style/modifiedEditText"
                 android:id="@+id/reg_password"
+                style="@style/modifiedEditText"
+                android:fontFamily="@font/poppins"
                 android:hint="@string/login_password_hint"
-                android:maxLines="1"
-                android:inputType="textPassword"/>
+                android:inputType="textPassword"
+                android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/parent"
             android:layout_marginTop="@dimen/signup_text_margin_top">
+
             <EditText
-                style="@style/modifiedEditText"
                 android:id="@+id/confirmPassword"
+                style="@style/modifiedEditText"
+                android:fontFamily="@font/poppins"
                 android:hint="@string/confirm_password_hint"
-                android:maxLines="1"
-                android:inputType="textPassword"/>
+                android:inputType="textPassword"
+                android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            style="@style/loginButton"
             android:id="@+id/loginb"
+            style="@style/loginButton"
             android:layout_gravity="center"
+            android:fontFamily="@font/poppins_medium"
             android:text="Register" />
 
         <Button
-            style="@style/newhereButton"
             android:id="@+id/newhb"
+            style="@style/newhereButton"
             android:layout_gravity="center_horizontal"
-            android:text="@string/already"
-            android:layout_marginTop="@dimen/loginViewsMargin"/>
+            android:layout_marginTop="@dimen/loginViewsMargin"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/already" />
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

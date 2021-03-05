@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/scrollView1"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
@@ -23,8 +24,6 @@
             app:layout_constraintEnd_toEndOf="parent"/>
 
 
-
-
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/title"
             android:layout_width="match_parent"
@@ -34,9 +33,9 @@
             app:counterOverflowTextAppearance="@style/CounterOverFlow"
             app:counterTextAppearance="@style/CounterText"
             app:hintTextAppearance="@style/HintText"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/go_back"
-            app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/go_back">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/post_title"
@@ -44,6 +43,7 @@
                 android:layout_height="60dp"
                 android:layout_marginTop="10dp"
                 android:background="#5103A9F4"
+                android:fontFamily="@font/poppins_medium"
                 android:gravity="top"
                 android:hint="@string/post_title_here"
                 android:textColor="@color/black"
@@ -72,6 +72,7 @@
                 android:layout_height="300dp"
                 android:layout_marginTop="10dp"
                 android:background="#4503A9F4"
+                android:fontFamily="@font/poppins"
                 android:gravity="top"
                 android:hint="@string/post_content"
                 android:textColor="@color/black"
@@ -79,30 +80,33 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+
         <TextView
             android:id="@+id/categories"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="24dp"
             android:background="@android:drawable/editbox_background"
             android:drawableEnd="@android:drawable/arrow_down_float"
             android:drawablePadding="16dp"
+            android:fontFamily="@font/poppins"
             android:hint="@string/select_categories"
             android:padding="12dp"
             android:textColorHint="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/post_image" />
 
-
         <ImageView
             android:id="@+id/post_image"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="10dp"
+            android:layout_width="76dp"
+            android:layout_height="84dp"
+            android:layout_marginTop="12dp"
             android:src="@drawable/baseline_add_a_photo_24"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.516"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/content" />
 
@@ -111,14 +115,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="16dp"
             android:background="@color/colorPrimaryDark"
+            android:fontFamily="@font/poppins_medium"
             android:text="@string/post_btn"
             android:textAllCaps="false"
             android:textColor="@color/colorPrimary"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/categories" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/title"
+            app:layout_constraintEnd_toEndOf="@+id/go_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/go_back" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
