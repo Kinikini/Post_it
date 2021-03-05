@@ -63,6 +63,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean is_admin;
 
 
+    @Override
+    public void onRestart()
+    {
+        super.onRestart();
+
+        finish();
+
+        startActivity(getIntent());
+    }
+
+
 
 
     @Nullable

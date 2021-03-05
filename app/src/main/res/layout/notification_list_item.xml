@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="start|center"
                 android:fontFamily="@font/poppins_medium"
-                android:text="TextView"
+                
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="start|center"
                 android:fontFamily="@font/poppins"
-                android:text="TextView"
+                
                 android:textSize="18sp" />
 
             <TextView
@@ -52,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="start|center"
                 android:fontFamily="@font/poppins"
-                android:text="TextView"
+                
                 android:textSize="18sp"
                 android:textStyle="italic" />
 

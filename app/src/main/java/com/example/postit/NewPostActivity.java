@@ -229,6 +229,8 @@ public class NewPostActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
 
+
+
                 final String content = postContent.getText().toString();
                 final String title = postTitle.getText().toString();
                 final String post_categories = categories.getText().toString();
@@ -238,6 +240,7 @@ public class NewPostActivity extends AppCompatActivity {
                         && postImageUri != null
                         && categories.getText().length()!=0)
                 {
+                    startActivity(new Intent(NewPostActivity.this,MainActivity.class));
 
 
                     String randomName = randomString(18);;
@@ -285,8 +288,16 @@ public class NewPostActivity extends AppCompatActivity {
                                             Toast toast = Toast.makeText(getApplicationContext(),getResources().getString(R.string.submited_post_msg).toString(),Toast.LENGTH_LONG);
                                             toast.show();
 
-                                            Intent mainIntent = new Intent(NewPostActivity.this,MainActivity.class);
-                                            startActivity(mainIntent);
+                                            final String notification_message = "new";
+
+                                            Map<String, Object> notificationsMap = new HashMap<>();
+                                            notificationsMap.put("notification_message", notification_message);
+                                            notificationsMap.put("post_id", "");
+                                            notificationsMap.put("action_id",current_user_id);
+                                            notificationsMap.put("timestamp", FieldValue.serverTimestamp());
+
+                                            firebaseFirestore.collection("AdminNotifs").add(notificationsMap);
+
                                             finish();
                                         }
                                         else

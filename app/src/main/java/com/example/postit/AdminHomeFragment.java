@@ -28,7 +28,7 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
-public class HomeFragment extends Fragment {
+public class AdminHomeFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -39,20 +39,20 @@ public class HomeFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private RecyclerView blog_list_view;
+    private RecyclerView blog_admin_list_view;
     private List<Post> blog_list;
 
     private FirebaseFirestore firebaseFirestore;
-    private BlogRecyclerAdapter blogRecyclerAdapter;
+    private AdminBlogRecyclerAdapter blogRecyclerAdapter;
 
 
 
-    public HomeFragment() {
+    public AdminHomeFragment() {
         // Required empty public constructor
     }
 
 
-   @Override
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
@@ -65,14 +65,14 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         super.onCreateView(inflater,container,savedInstanceState);
 
-        View view = inflater.inflate(R.layout.fragment_home, container, false);// Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_admin_home, container, false);// Inflate the layout for this fragment
 
 
         blog_list = new ArrayList<>();
-        blog_list_view = view.findViewById(R.id.blog_list_view);
-        blogRecyclerAdapter = new BlogRecyclerAdapter(blog_list);
-        blog_list_view.setLayoutManager(new LinearLayoutManager(getActivity()));
-        blog_list_view.setAdapter(blogRecyclerAdapter);
+        blog_admin_list_view = view.findViewById(R.id.blog_admin_list_view);
+        blogRecyclerAdapter = new AdminBlogRecyclerAdapter(blog_list);
+        blog_admin_list_view.setLayoutManager(new LinearLayoutManager(getActivity()));
+        blog_admin_list_view.setAdapter(blogRecyclerAdapter);
 
 
 
@@ -91,8 +91,8 @@ public class HomeFragment extends Fragment {
                     {
                         String postId = doc.getDocument().getId();
                         Post post = doc.getDocument().toObject(Post.class).withId(postId);
-
-                        if(post.getPublished()) {blog_list.add(post);}
+                        if(!post.getPublished())
+                        blog_list.add(post);
                         blogRecyclerAdapter.notifyDataSetChanged();
                     }
                 }

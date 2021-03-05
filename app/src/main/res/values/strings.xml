@@ -87,4 +87,14 @@
     <string name="create_user">Create user</string>
     <string name="ban_user">Ban user</string>
     <string name="unpublished_publication">Unpublished</string>
+    <string name="validate">Validate</string>
+    <string name="refuse">Refuse</string>
+    <string name="successfull_published">Successfully published</string>
+    <string name="unsuccessfull_published">Post successfully declined</string>
+
+    <string name="your_post">Your post</string>
+    <string name="been_published">has been published.</string>
+    <string name="not_been_published">has been rejected.</string>
+    <string name="see_as_user">See as a user</string>
+    <string name="new_sub">Submit a new publication</string>
 </resources>

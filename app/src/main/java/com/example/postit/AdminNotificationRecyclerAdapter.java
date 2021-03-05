@@ -36,7 +36,7 @@ import javax.annotation.Nullable;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class NotificationsRecyclerAdapter extends RecyclerView.Adapter<NotificationsRecyclerAdapter.ViewHolder> {
+public class AdminNotificationRecyclerAdapter extends RecyclerView.Adapter<AdminNotificationRecyclerAdapter.ViewHolder> {
 
     public List<Notification> notification_list;
     public Context context;
@@ -51,7 +51,7 @@ public class NotificationsRecyclerAdapter extends RecyclerView.Adapter<Notificat
 
 
 
-    public NotificationsRecyclerAdapter(List<Notification> notification_list){
+    public AdminNotificationRecyclerAdapter(List<Notification> notification_list){
         this.notification_list = notification_list;
     }
 
@@ -63,7 +63,7 @@ public class NotificationsRecyclerAdapter extends RecyclerView.Adapter<Notificat
         context = parent.getContext();
         firebaseFirestore = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
-        return new NotificationsRecyclerAdapter.ViewHolder(view);
+        return new AdminNotificationRecyclerAdapter.ViewHolder(view);
     }
 
     @Override
@@ -83,11 +83,9 @@ public class NotificationsRecyclerAdapter extends RecyclerView.Adapter<Notificat
         {
             holder.setNotificationText(context.getResources().getString(R.string.notification_like_message).toString());
         }
-        else if((notification_type.equals("new")))
+        else
         {
-            holder.setNotificationText(context.getResources().getString(R.string.new_sub));
-
-
+            holder.setNotificationText(notification_type);
         }
 
 
@@ -110,12 +108,29 @@ public class NotificationsRecyclerAdapter extends RecyclerView.Adapter<Notificat
                 }
                 else
                 {
-                    holder.setPostTitleView();
+
                 }
             }
         });
 
+        firebaseFirestore.collection("Posts").document(post_id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful())
+                {
+                    String title = task.getResult().getString("title");
 
+
+                    holder.setPostTitleView(title);
+
+
+                }
+                else
+                {
+
+                }
+            }
+        });
 
     }
 
@@ -160,10 +175,10 @@ public class NotificationsRecyclerAdapter extends RecyclerView.Adapter<Notificat
             postUserNameView.setText(name);
         }
 
-        public void setPostTitleView()
+        public void setPostTitleView(String name)
         {
             postTitleView = mView.findViewById(R.id.notif_post_title);
-            postTitleView.setVisibility(View.INVISIBLE);
+            postTitleView.setText(name);
         }
 
 

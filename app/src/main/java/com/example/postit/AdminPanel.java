@@ -48,8 +48,8 @@ public class AdminPanel extends AppCompatActivity implements NavigationView.OnNa
     private String current_user_id;
     private BottomNavigationView mainBottomNav;
 
-    private HomeFragment homeFragment;
-    private NotificationFragment notificationFragment;
+    private AdminHomeFragment adminHomeFragment;
+    private AdminNotificationFragment notificationFragment;
     private AccountFragment accountFragment;
 
     private Toolbar toolbar;
@@ -72,6 +72,16 @@ public class AdminPanel extends AppCompatActivity implements NavigationView.OnNa
     }
 
     @Override
+    public void onRestart()
+    {
+        super.onRestart();
+
+        finish();
+
+        startActivity(getIntent());
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
@@ -91,12 +101,12 @@ public class AdminPanel extends AppCompatActivity implements NavigationView.OnNa
 
 
             //FRAGMENTS
-            homeFragment = new HomeFragment();
-            notificationFragment = new NotificationFragment();
+            adminHomeFragment = new AdminHomeFragment();
+            notificationFragment = new AdminNotificationFragment();
             accountFragment = new AccountFragment();
 
 
-            replaceFragment(homeFragment);
+            replaceFragment(adminHomeFragment);
 
 
             toolbar = findViewById(R.id.main_toolbar);
@@ -131,9 +141,44 @@ public class AdminPanel extends AppCompatActivity implements NavigationView.OnNa
                 @Override
                 public boolean onNavigationItemSelected(MenuItem item) {
 
-                    return false;
+                    switch (item.getItemId())
+                    {
+                        case R.id.see_as_user:
+                            Intent settingsIntent = new Intent(AdminPanel.this, MainActivity.class);
+                            startActivity(settingsIntent);
+
+                            return true;
+                        case R.id.action_admin_unpublished:
+                            replaceFragment(adminHomeFragment);
+                            return true;
+
+                        case R.id.action_admin_notification:
+                            replaceFragment(notificationFragment);
+                            return true;
+
+                        case R.id.action_create_admin:
+                            //replaceFragment(accountFragment);
+                            return true;
+                        case R.id.action_logout_button:
+
+                            logOut();
+                            return true;
+
+
+                        case R.id.action_setting_button:
+
+                            Intent adminIntent = new Intent(AdminPanel.this, SetupActivity.class);
+                            startActivity(adminIntent);
+
+                            return true;
+                        default:
+                            return false;
 
                     }
+
+
+
+                }
 
 
             });
@@ -192,7 +237,7 @@ public class AdminPanel extends AppCompatActivity implements NavigationView.OnNa
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
 
-                    //replaceFragment(homeFragment);
+                    //replaceFragment(adminHomeFragment);
                     if (task.isSuccessful()){
 
                         if (!task.getResult().exists()){
@@ -272,7 +317,7 @@ public class AdminPanel extends AppCompatActivity implements NavigationView.OnNa
     private void replaceFragment(Fragment fragment){
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
 
-        fragmentTransaction.replace(R.id.main_container,fragment);
+        fragmentTransaction.replace(R.id.admin_container,fragment);
         fragmentTransaction.commit();
     }
 
@@ -285,6 +330,8 @@ public class AdminPanel extends AppCompatActivity implements NavigationView.OnNa
     public void onPointerCaptureChanged(boolean hasCapture) {
 
     }
+
+
 
     public void setUserNameView(String name)
     {

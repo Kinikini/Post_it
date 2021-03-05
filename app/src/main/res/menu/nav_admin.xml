@@ -3,7 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-
+    <item
+        android:id="@+id/see_as_user"
+        android:title="@string/see_as_user"
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/action_admin_unpublished"
