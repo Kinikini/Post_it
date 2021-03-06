@@ -10,7 +10,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/mon_icone"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/mon_icone"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".SearchResultsActivity">
