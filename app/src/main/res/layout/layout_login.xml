@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     style="@style/loginCard"
     app:cardCornerRadius="@dimen/loginCardRadius"
     android:elevation="5dp"
@@ -19,11 +19,20 @@
         android:layout_gravity="center"
         android:padding="@dimen/loginViewsMargin">
 
+        <ProgressBar
+            android:id="@+id/login_progress"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:foregroundGravity="center"
+            tools:visibility="invisible" />
+
         <TextView
             style="@style/headerTextPrimary"
             android:layout_marginTop="@dimen/loginViewsMargin"
             android:fontFamily="@font/poppins_medium"
-            android:text="Login" />
+            android:text="@string/login" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputEmail"

@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 apply plugin: 'com.google.gms.google-services'
 
 android {
@@ -41,6 +42,7 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.coordinatorlayout:coordinatorlayout:1.1.0'
     implementation 'com.google.firebase:firebase-database:16.0.4'
+    implementation 'com.google.firebase:firebase-messaging:17.3.4'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
     implementation 'com.google.firebase:firebase-storage:16.0.4'
     implementation 'com.google.firebase:firebase-firestore:17.1.2'
@@ -54,3 +56,4 @@ dependencies {
 
 
 }
+

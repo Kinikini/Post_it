@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "233704470952",
+    "firebase_url": "https://postit-6858f-default-rtdb.firebaseio.com",
     "project_id": "postit-6858f",
     "storage_bucket": "postit-6858f.appspot.com"
   },
@@ -19,6 +20,14 @@
           "android_info": {
             "package_name": "com.example.postit",
             "certificate_hash": "cfc5f530f06f5ef4f55c1a46f24a6f1781e98052"
+          }
+        },
+        {
+          "client_id": "233704470952-kl6ui7o9vf3g3dekgepbdub5n4r6c5lc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.postit",
+            "certificate_hash": "c42d10ce5f29f6702cdab405255a3995e9d75370"
           }
         },
         {

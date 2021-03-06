@@ -70,7 +70,7 @@ public class CreateAdminActivity extends AppCompatActivity {
 
                                     //firebaseFirestore.collection("Admin/"+mAuth.getCurrentUser().getUid()+"/").add(new HashMap<>());
 
-                                    Toast.makeText(CreateAdminActivity.this,mAuth.getCurrentUser().getUid(),Toast.LENGTH_LONG).show();
+                                    //Toast.makeText(CreateAdminActivity.this,mAuth.getCurrentUser().getUid(),Toast.LENGTH_LONG).show();
 
                                     String newId = mAuth.getCurrentUser().getUid().toString();
 

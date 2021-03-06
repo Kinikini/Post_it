@@ -10,14 +10,6 @@
 
         <RelativeLayout
             style="@style/parent">
-            <ProgressBar
-                android:id="@+id/login_progress"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="263dp"
-                android:layout_height="13dp"
-                android:layout_marginTop="4dp"
-                android:visibility="invisible"/>
-
 
 
             <LinearLayout

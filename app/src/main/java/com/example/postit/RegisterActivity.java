@@ -43,6 +43,7 @@ public class RegisterActivity extends AppCompatActivity {
         createaccount = findViewById(R.id.loginb);
         alreadyb = findViewById(R.id.newhb);
         regprogress = findViewById(R.id.login_progress);
+        regprogress.setVisibility(View.INVISIBLE);
 
 
         alreadyb.setOnClickListener(new View.OnClickListener() {
@@ -67,11 +68,12 @@ public class RegisterActivity extends AppCompatActivity {
 
                     if (password.equals(passconfirm)) {
 
-                        regprogress.setVisibility(View.VISIBLE);
+
 
                         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
+                                regprogress.setVisibility(View.VISIBLE);
 
                                 if (task.isSuccessful()) {
 
@@ -84,7 +86,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                                     String errorMessage = task.getException().getMessage();
                                     Toast.makeText(RegisterActivity.this, "Error : " + errorMessage, Toast.LENGTH_LONG).show();
-
+                                    regprogress.setVisibility(View.INVISIBLE);
                                 }
 
                             }
@@ -96,6 +98,8 @@ public class RegisterActivity extends AppCompatActivity {
 
                     }
 
+                    regprogress.setVisibility(View.INVISIBLE);
+
                 }
 
 
@@ -105,6 +109,17 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+
+        regprogress = findViewById(R.id.login_progress);
+
+        regprogress.setVisibility(View.INVISIBLE);
+
+
+    }
 
     @Override
     protected void onStart() {

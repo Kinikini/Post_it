@@ -29,6 +29,18 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
 
     @Override
+    public void onResume()
+    {
+        super.onResume();
+
+        loginprogress = findViewById(R.id.login_progress);
+
+        loginprogress.setVisibility(View.INVISIBLE);
+
+
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
@@ -40,6 +52,8 @@ public class LoginActivity extends AppCompatActivity {
         loginb = findViewById(R.id.loginb);
         newhb = findViewById(R.id.newhb);
         loginprogress = findViewById(R.id.login_progress);
+
+        loginprogress.setVisibility(View.INVISIBLE);
 
 
         newhb.setOnClickListener(new View.OnClickListener() {
@@ -66,27 +80,35 @@ public class LoginActivity extends AppCompatActivity {
 
                 if (!TextUtils.isEmpty(loginEmail) && !TextUtils.isEmpty(loginPass)){
 
+
                     //loginprogress.setVisibility(View.VISIBLE);
 
                     mAuth.signInWithEmailAndPassword(loginEmail, loginPass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
+                            loginprogress.setVisibility(View.VISIBLE);
 
                             if (task.isSuccessful()){
-                                loginprogress.setVisibility(View.VISIBLE);
+
                                 sendToMain();
 
                             } else {
 
                                 String errorMessage = task.getException().getMessage();
                                 Toast.makeText(LoginActivity.this, "Error : "+ errorMessage, Toast.LENGTH_LONG).show();
+                                loginprogress.setVisibility(View.INVISIBLE);
+
 
                             }
 
-                            loginprogress.setVisibility(View.INVISIBLE);
+                            //
+
+
 
                         }
                     });
+
+                    loginprogress.setVisibility(View.INVISIBLE);
 
 
                 }
