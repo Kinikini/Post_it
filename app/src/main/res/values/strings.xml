@@ -55,12 +55,12 @@
     <string name="sport">Sport</string>
     <string name="health">Health</string>
     <string name="Food">Food</string>
-    <string name="political">Political</string>
+    <string name="political">Politics</string>
     <string name="news">News</string>
     <string name="gaming">Gaming</string>
     <string name="finance">Finance</string>
     <string name="music">Music</string>
-    <string name="moovie">Moovie</string>
+    <string name="moovie">Movie</string>
     <string name="fashion">Fashion</string>
     <string name="travel">Travel</string>
     <string name="other">Other</string>
@@ -80,10 +80,10 @@
 
     <string name="comments">Comments:</string>
     <string name="your_comment_here">Your comment here...</string>
-    <string name="notification_comment_message">commented on your publication</string>
+    <string name="notification_comment_message">commented your publication</string>
     <string name="notification_like_message">liked your publication.</string>
     <string name="user_administration">User management</string>
-    <string name="create_admin">Create administarator</string>
+    <string name="create_admin">Create administrator</string>
     <string name="create_user">Create user</string>
     <string name="ban_user">Ban user</string>
     <string name="unpublished_publication">Unpublished</string>

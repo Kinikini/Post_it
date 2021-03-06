@@ -9,7 +9,7 @@
     <string name="action_setting_text">Paramètres</string>
     <string name="action_logout_text">Déconnexion</string>
     <string name="createaccount">Créer un compte</string>
-    <string name="already">Déjà membre? Connectez vous</string>
+    <string name="already">Déjà membre? Connectez-vous</string>
     <string name="confirmPassword">Confirmez votre mot de passe</string>
     <string name="setup_name_hint">Votre nom</string>
     <string name="setup_btn_name_text">Sauvegarder les paramètres du compte</string>
@@ -19,7 +19,7 @@
 
     <string name="submited_post_msg">Le post a été soumis avec succès.</string>
     <string name="unsubmited_post_msg">Veuillez remplir tous les champs.</string>
-    <string name="bottom_home_text">Acueil</string>
+    <string name="bottom_home_text">Accueil</string>
     <string name="bottom_notifications_text">Notifications</string>
     <string name="bottom_ac_text">Compte</string>
     <!-- TODO: Remove or change this placeholder text -->
@@ -38,7 +38,7 @@
     <string name="login_password_hint">Mot de passe</string>
     <string name="confirm_password_hint">Confirmation mot de passe</string>
     <string name="signup_login_hint">Déjà inscrit? Connexion</string>
-    <string name="login_signup_hint">Pas inscirt? S\'inscrire</string>
+    <string name="login_signup_hint">Pas inscrit? S\'inscrire</string>
 
     <string name="setting_updated">Paramètres mis à jour!</string>
     <string name="post_content">Votre texte ici</string>
@@ -80,7 +80,7 @@
     <string name="administration_space">Espace d\'administration</string>
     <string name="menu">Menu</string>
     <string name="comments">Commentaires:</string>
-    <string name="your_comment_here">Your comment here...</string>
+    <string name="your_comment_here">Votre commentaire ici...</string>
     <string name="notification_comment_message">a commenté votre publication</string>
     <string name="notification_like_message">a aimé votre publication.</string>
     <string name="user_administration">Gestion des utilisateurs</string>
