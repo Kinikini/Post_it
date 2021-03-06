@@ -86,16 +86,18 @@
     <string name="user_administration">Gestion des utilisateurs</string>
     <string name="create_admin">Créer administrateur</string>
     <string name="create_user">Créer utilisateur</string>
-    <string name="ban_user">Bannir utilisateur</string>
+    <string name="ban_user">Bannir</string>
     <string name="unpublished_publication">Non publiés</string>
     <string name="validate">Accepter</string>
     <string name="refuse">Refuser</string>
-    <string name="successfull_published">   <p>Publié avec succès</p></string>
+    <string name="successfull_published">Publié avec succès</string>
     <string name="unsuccessfull_published">Poste décliné</string>
 
     <string name="your_post">Votre post</string>
     <string name="been_published">a été publié.</string>
     <string name="not_been_published">a été rejeté.</string>
-    <string name="see_as_user">See as a user</string>
-    <string name="new_sub">Submit a new publication</string>
+    <string name="see_as_user">Voir en tant qu\'utilisateur</string>
+    <string name="new_sub">Soumettre une nouvelle publication</string>
+    <string name="btn_sign_up">Créer</string>
+    <string name="notification_new_post">a fait une nouvelle publication.</string>
 </resources>

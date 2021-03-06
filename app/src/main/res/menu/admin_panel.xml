@@ -25,11 +25,6 @@
                 android:icon="@drawable/baseline_notifications_black_24"
                 android:title="@string/bottom_notifications_text"
                 app:showAsAction="always" />
-            <item
-                android:id="@+id/bottom_action_account"
-                android:icon="@drawable/baseline_person_black_24"
-                android:title="@string/bottom_ac_text"
-                app:showAsAction="always" />
         </menu>
     </item>
 

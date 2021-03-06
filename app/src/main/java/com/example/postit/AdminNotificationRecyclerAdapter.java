@@ -83,6 +83,10 @@ public class AdminNotificationRecyclerAdapter extends RecyclerView.Adapter<Admin
         {
             holder.setNotificationText(context.getResources().getString(R.string.notification_like_message).toString());
         }
+        else if(notification_type.equals("new"))
+        {
+            holder.setNotificationText(context.getResources().getString(R.string.notification_new_post).toString());
+        }
         else
         {
             holder.setNotificationText(notification_type);
@@ -92,6 +96,8 @@ public class AdminNotificationRecyclerAdapter extends RecyclerView.Adapter<Admin
         String action_id = notification_list.get(position).getAction_id();
 
         String post_id = notification_list.get(position).getPost_id();
+
+        if(action_id!=null)
 
         firebaseFirestore.collection("Users").document(action_id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -113,24 +119,7 @@ public class AdminNotificationRecyclerAdapter extends RecyclerView.Adapter<Admin
             }
         });
 
-        firebaseFirestore.collection("Posts").document(post_id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful())
-                {
-                    String title = task.getResult().getString("title");
 
-
-                    holder.setPostTitleView(title);
-
-
-                }
-                else
-                {
-
-                }
-            }
-        });
 
     }
 

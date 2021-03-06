@@ -13,6 +13,9 @@
         android:roundIcon="@mipmap/mon_icone"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <activity android:name=".CreateAdminActivity"></activity>
+
         <activity android:name=".SearchResultsActivity">
 
             <intent-filter>

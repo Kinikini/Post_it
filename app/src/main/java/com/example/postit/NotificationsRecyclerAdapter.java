@@ -97,7 +97,7 @@ public class NotificationsRecyclerAdapter extends RecyclerView.Adapter<Notificat
 
         //Log.d("id",action_id);
 
-
+        if(action_id!=null)
         firebaseFirestore.collection("Users")
                 .document(action_id).get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
