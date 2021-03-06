@@ -19,7 +19,7 @@
 
     <string name="submited_post_msg">Le post a été soumis avec succès.</string>
     <string name="unsubmited_post_msg">Veuillez remplir tous les champs.</string>
-    <string name="bottom_home_text">Acueil</string>
+    <string name="bottom_home_text">Accueil</string>
     <string name="bottom_notifications_text">Notifications</string>
     <string name="bottom_ac_text">Compte</string>
     <!-- TODO: Remove or change this placeholder text -->
@@ -80,22 +80,23 @@
     <string name="administration_space">Espace d\'administration</string>
     <string name="menu">Menu</string>
     <string name="comments">Commentaires:</string>
-    <string name="your_comment_here">Your comment here...</string>
+    <string name="your_comment_here">Votre commentaire ici...</string>
     <string name="notification_comment_message">a commenté votre publication</string>
     <string name="notification_like_message">a aimé votre publication.</string>
     <string name="user_administration">Gestion des utilisateurs</string>
     <string name="create_admin">Créer administrateur</string>
     <string name="create_user">Créer utilisateur</string>
-    <string name="ban_user">Bannir utilisateur</string>
+    <string name="ban_user">Bannir</string>
     <string name="unpublished_publication">Non publiés</string>
     <string name="validate">Accepter</string>
     <string name="refuse">Refuser</string>
-    <string name="successfull_published">   <p>Publié avec succès</p></string>
+    <string name="successfull_published">Publié avec succès</string>
     <string name="unsuccessfull_published">Poste décliné</string>
 
     <string name="your_post">Votre post</string>
     <string name="been_published">a été publié.</string>
     <string name="not_been_published">a été rejeté.</string>
-    <string name="see_as_user">See as a user</string>
-    <string name="new_sub">Submit a new publication</string>
+    <string name="see_as_user">Voir en tant qu\'utilisateur</string>
+    <string name="new_sub">Soumettre une nouvelle publication</string>
+    <string name="btn_sign_up">Créer</string>
 </resources>

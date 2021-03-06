@@ -126,6 +126,7 @@ public class SetupActivity extends AppCompatActivity {
                 if (!TextUtils.isEmpty(user_name) && mainImageURI != null) {
                     setupProgress.setVisibility(View.VISIBLE);
 
+
                 if (ischanged) {
 
 
@@ -172,6 +173,10 @@ public class SetupActivity extends AppCompatActivity {
 
                 }
 
+                }
+                else
+                {
+                    Toast.makeText(SetupActivity.this,getResources().getString(R.string.unsubmited_post_msg).toString(),Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -246,6 +251,7 @@ public class SetupActivity extends AppCompatActivity {
                 }
 
             }
+
 
             private void BringImagePicker() {
 

@@ -62,6 +62,8 @@ public class AdminPanel extends AppCompatActivity implements NavigationView.OnNa
 
     public boolean is_admin;
 
+    private UserFragment userFragment;
+
 
 
 
@@ -104,6 +106,7 @@ public class AdminPanel extends AppCompatActivity implements NavigationView.OnNa
             adminHomeFragment = new AdminHomeFragment();
             notificationFragment = new AdminNotificationFragment();
             accountFragment = new AccountFragment();
+            userFragment = new UserFragment();
 
 
             replaceFragment(adminHomeFragment);
@@ -157,8 +160,17 @@ public class AdminPanel extends AppCompatActivity implements NavigationView.OnNa
                             return true;
 
                         case R.id.action_create_admin:
-                            //replaceFragment(accountFragment);
+
+                            Intent createAdminIntent = new Intent(AdminPanel.this, CreateAdminActivity.class);
+                            startActivity(createAdminIntent);
+
                             return true;
+                        case R.id.action_ban_user:
+
+                            replaceFragment(userFragment);
+
+                            return true;
+
                         case R.id.action_logout_button:
 
                             logOut();
