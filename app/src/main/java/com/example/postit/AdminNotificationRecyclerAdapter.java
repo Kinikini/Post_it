@@ -59,7 +59,7 @@ public class AdminNotificationRecyclerAdapter extends RecyclerView.Adapter<Admin
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.notification_list_item,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.admin_notification_list_item,parent,false);
         context = parent.getContext();
         firebaseFirestore = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
@@ -155,7 +155,7 @@ public class AdminNotificationRecyclerAdapter extends RecyclerView.Adapter<Admin
         }
 
         public void setNotificationText(String text){
-            notificationMessageView = mView.findViewById(R.id.notification_message);
+            notificationMessageView = mView.findViewById(R.id.admin_notification_message);
             notificationMessageView.setText(text);
 
 
@@ -163,7 +163,7 @@ public class AdminNotificationRecyclerAdapter extends RecyclerView.Adapter<Admin
 
         public void setAuthorProfilView(String image)
         {
-            authorProfilView = mView.findViewById(R.id.notification_profil);
+            authorProfilView = mView.findViewById(R.id.admin_notification_profil);
             RequestOptions placeholderOptions = new RequestOptions();
             placeholderOptions.placeholder(R.drawable.profile_placeholder);
             Glide.with(context).applyDefaultRequestOptions(placeholderOptions).load(image).into(authorProfilView);
@@ -171,13 +171,13 @@ public class AdminNotificationRecyclerAdapter extends RecyclerView.Adapter<Admin
 
         public void setUserNameView(String name)
         {
-            postUserNameView = mView.findViewById(R.id.notification_user_name);
+            postUserNameView = mView.findViewById(R.id.admin_notification_user_name);
             postUserNameView.setText(name);
         }
 
         public void setPostTitleView(String name)
         {
-            postTitleView = mView.findViewById(R.id.notif_post_title);
+            postTitleView = mView.findViewById(R.id.admin_notif_post_title);
             postTitleView.setText(name);
         }
 

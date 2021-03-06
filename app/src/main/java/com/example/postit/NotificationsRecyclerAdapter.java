@@ -3,6 +3,7 @@ package com.example.postit;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,19 +84,23 @@ public class NotificationsRecyclerAdapter extends RecyclerView.Adapter<Notificat
         {
             holder.setNotificationText(context.getResources().getString(R.string.notification_like_message).toString());
         }
-        else if((notification_type.equals("new")))
+        else
         {
-            holder.setNotificationText(context.getResources().getString(R.string.new_sub));
-
-
+            holder.setNotificationText(notification_type);
         }
+
 
 
         String action_id = notification_list.get(position).getAction_id();
 
         String post_id = notification_list.get(position).getPost_id();
 
-        firebaseFirestore.collection("Users").document(action_id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        //Log.d("id",action_id);
+
+
+        firebaseFirestore.collection("Users")
+                .document(action_id).get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if(task.isSuccessful())
@@ -110,7 +115,30 @@ public class NotificationsRecyclerAdapter extends RecyclerView.Adapter<Notificat
                 }
                 else
                 {
-                    holder.setPostTitleView();
+
+                }
+            }
+        });
+
+
+        if(notification_type.equals("comment") || notification_type.equals("like"))
+        firebaseFirestore.collection("Posts")
+                .document(post_id).get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful())
+                {
+                    String title = task.getResult().getString("title");
+
+
+                    holder.setPostTitleView(title);
+
+
+                }
+                else
+                {
+
                 }
             }
         });
@@ -160,7 +188,13 @@ public class NotificationsRecyclerAdapter extends RecyclerView.Adapter<Notificat
             postUserNameView.setText(name);
         }
 
-        public void setPostTitleView()
+        public void setPostTitleView(String name)
+        {
+            postTitleView = mView.findViewById(R.id.notif_post_title);
+            postTitleView.setText(name);
+        }
+
+        public void clearPostTitleView()
         {
             postTitleView = mView.findViewById(R.id.notif_post_title);
             postTitleView.setVisibility(View.INVISIBLE);
