@@ -19,7 +19,7 @@
 
     <string name="submited_post_msg">Le post a été soumis avec succès.</string>
     <string name="unsubmited_post_msg">Veuillez remplir tous les champs.</string>
-    <string name="bottom_home_text">Accueil</string>
+    <string name="bottom_home_text">Fil d\'actualité</string>
     <string name="bottom_notifications_text">Notifications</string>
     <string name="bottom_ac_text">Compte</string>
     <!-- TODO: Remove or change this placeholder text -->
