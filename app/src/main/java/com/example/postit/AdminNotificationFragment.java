@@ -46,7 +46,7 @@ public class AdminNotificationFragment extends Fragment {
 
     private FirebaseFirestore firebaseFirestore;
     private FirebaseAuth firebaseAuth;
-    private NotificationsRecyclerAdapter notificationsRecyclerAdapter;
+    private AdminNotificationRecyclerAdapter notificationsRecyclerAdapter;
 
     public AdminNotificationFragment() {
         // Required empty public constructor
@@ -89,7 +89,7 @@ public class AdminNotificationFragment extends Fragment {
 
         notification_list = new ArrayList<>();
         notification_list_view = view.findViewById(R.id.notification_list_view);
-        notificationsRecyclerAdapter = new NotificationsRecyclerAdapter(notification_list);
+        notificationsRecyclerAdapter = new AdminNotificationRecyclerAdapter(notification_list);
         notification_list_view.setLayoutManager(new LinearLayoutManager(getActivity()));
         notification_list_view.setAdapter(notificationsRecyclerAdapter);
 

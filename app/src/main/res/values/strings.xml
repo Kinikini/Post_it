@@ -98,4 +98,5 @@
     <string name="see_as_user">See as a user</string>
     <string name="new_sub">Submit a new publication</string>
     <string name="btn_sign_up">Create</string>
+    <string name="notification_new_post">has made a new publication.</string>
 </resources>
