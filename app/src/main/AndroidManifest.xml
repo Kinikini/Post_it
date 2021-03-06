@@ -13,9 +13,9 @@
         android:roundIcon="@mipmap/mon_icone"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-<<<<<<< HEAD
+
         <activity android:name=".CreateAdminActivity"></activity>
-=======
+
         <activity android:name=".SearchResultsActivity">
 
             <intent-filter>
@@ -23,7 +23,6 @@
             </intent-filter>
 
         </activity>
->>>>>>> 95520ce2b1b41c257fcecc263e87a3985b0e166f
         <activity android:name=".AdminPanel" />
         <activity android:name=".CommentsActivity" />
         <activity android:name=".Splash">
