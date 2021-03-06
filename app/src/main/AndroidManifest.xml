@@ -8,12 +8,19 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/mon_icone"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AdminPanel"></activity>
+        <activity android:name=".SearchResultsActivity">
+
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+
+        </activity>
+        <activity android:name=".AdminPanel" />
         <activity android:name=".CommentsActivity" />
         <activity android:name=".Splash">
             <intent-filter>
@@ -33,6 +40,10 @@
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
